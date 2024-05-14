@@ -20,25 +20,40 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                ///Spacer()
+                
                 Text("Welcome to PiwiConcierge!")
                     .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
                     .padding()
 
                 Toggle("Show Immersive Space", isOn: $showImmersiveSpace)
-                    .font(.title)
-                    .frame(width: 360)
-                    .padding(24)
+                    .font(.title2)
+                    .frame(width: 300)
+                    .padding()
                     .glassBackgroundEffect()
+                    .cornerRadius(10)
+                    .padding(.bottom, 20)
 
                 NavigationLink(destination: PlaceholderView()) {
                     Text("Start Shopping")
-                        .font(.title)
+                        .font(.title2)
                         .padding()
+                        .frame(width: 300)
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
+
+                ///Spacer()
             }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color(.systemBackground))
+                    .shadow(radius: 10)
+            )
             .padding()
             .onChange(of: showImmersiveSpace) { _, newValue in
                 Task {
