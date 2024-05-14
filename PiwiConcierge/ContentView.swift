@@ -61,9 +61,18 @@ struct HeroSection: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            LottieView(filename: "shopping-cart-animation")
-                .frame(height: 200)
-                .padding(.bottom, 10)
+            ZStack {
+                // Background image
+                Image("icon-background")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 100) // Adjusted size
+                
+                // Lottie animation
+                LottieView(filename: "shopping-cart-animation")
+                    .frame(height: 100) // Adjusted size
+            }
+            .padding(.bottom, 10)
             
             Text("Welcome to PiwiConcierge!")
                 .font(.largeTitle)
@@ -244,8 +253,15 @@ struct LottieView: UIViewRepresentable {
         let animationView = LottieAnimationView(animation: animation)
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .loop
-        animationView.play()
+        animationView.loopMode = .playOnce
+        
+        animationView.play { (finished) in
+            if finished {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 1 second delay
+                    animationView.play()
+                }
+            }
+        }
 
         view.addSubview(animationView)
         NSLayoutConstraint.activate([

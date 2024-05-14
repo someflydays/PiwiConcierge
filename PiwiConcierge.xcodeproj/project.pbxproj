@@ -14,6 +14,9 @@
 		656A1C472BF2A27C000A86A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 656A1C462BF2A27C000A86A0 /* Assets.xcassets */; };
 		656A1C4A2BF2A27C000A86A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 656A1C492BF2A27C000A86A0 /* Preview Assets.xcassets */; };
 		656A1C552BF2A27D000A86A0 /* PiwiConciergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A1C542BF2A27D000A86A0 /* PiwiConciergeTests.swift */; };
+		656A1C622BF31067000A86A0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 656A1C612BF31067000A86A0 /* Lottie */; };
+		656A1C662BF32A83000A86A0 /* shopping-cart-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 656A1C652BF32A83000A86A0 /* shopping-cart-animation.json */; };
+		656A1C682BF32C9E000A86A0 /* icon-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 656A1C672BF32C9E000A86A0 /* icon-background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,8 @@
 		656A1C4B2BF2A27C000A86A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		656A1C502BF2A27D000A86A0 /* PiwiConciergeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PiwiConciergeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		656A1C542BF2A27D000A86A0 /* PiwiConciergeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiwiConciergeTests.swift; sourceTree = "<group>"; };
+		656A1C652BF32A83000A86A0 /* shopping-cart-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "shopping-cart-animation.json"; path = "../../../../../../../Artist/Logos/Piwi Concierge Logos/shopping-cart-animation.json"; sourceTree = "<group>"; };
+		656A1C672BF32C9E000A86A0 /* icon-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-background.png"; path = "../../../../../../../Artist/Logos/Piwi Concierge Logos/icon-background.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				656A1C3F2BF2A27B000A86A0 /* RealityKitContent in Frameworks */,
+				656A1C622BF31067000A86A0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +90,8 @@
 				656A1C422BF2A27B000A86A0 /* ContentView.swift */,
 				656A1C442BF2A27B000A86A0 /* ImmersiveView.swift */,
 				656A1C462BF2A27C000A86A0 /* Assets.xcassets */,
+				656A1C652BF32A83000A86A0 /* shopping-cart-animation.json */,
+				656A1C672BF32C9E000A86A0 /* icon-background.png */,
 				656A1C4B2BF2A27C000A86A0 /* Info.plist */,
 				656A1C482BF2A27C000A86A0 /* Preview Content */,
 			);
@@ -132,6 +140,7 @@
 			name = PiwiConcierge;
 			packageProductDependencies = (
 				656A1C3E2BF2A27B000A86A0 /* RealityKitContent */,
+				656A1C612BF31067000A86A0 /* Lottie */,
 			);
 			productName = PiwiConcierge;
 			productReference = 656A1C392BF2A27B000A86A0 /* PiwiConcierge.app */;
@@ -183,6 +192,9 @@
 				Base,
 			);
 			mainGroup = 656A1C302BF2A27B000A86A0;
+			packageReferences = (
+				656A1C602BF31067000A86A0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 656A1C3A2BF2A27B000A86A0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,6 +212,8 @@
 			files = (
 				656A1C4A2BF2A27C000A86A0 /* Preview Assets.xcassets in Resources */,
 				656A1C472BF2A27C000A86A0 /* Assets.xcassets in Resources */,
+				656A1C682BF32C9E000A86A0 /* icon-background.png in Resources */,
+				656A1C662BF32A83000A86A0 /* shopping-cart-animation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,10 +501,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		656A1C602BF31067000A86A0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		656A1C3E2BF2A27B000A86A0 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
+		};
+		656A1C612BF31067000A86A0 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 656A1C602BF31067000A86A0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
