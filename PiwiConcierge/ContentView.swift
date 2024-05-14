@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 import RealityKit
 import RealityKitContent
 
@@ -60,6 +61,10 @@ struct HeroSection: View {
 
     var body: some View {
         VStack(spacing: 10) {
+            LottieView(filename: "shopping-animation") // Ensure the animation file exists in your project
+                .frame(height: 200)
+                .padding(.bottom, 10)
+            
             Text("Welcome to PiwiConcierge!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -105,7 +110,7 @@ struct RecommendationSection: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     ForEach(0..<5) { _ in
-                        ProductCard()
+                        InteractiveProductCard()
                     }
                 }
                 .padding(.horizontal)
@@ -166,7 +171,9 @@ struct NavigationMenu: View {
     }
 }
 
-struct ProductCard: View {
+struct InteractiveProductCard: View {
+    @State private var isLiked = false
+
     var body: some View {
         VStack {
             Rectangle()
@@ -174,10 +181,35 @@ struct ProductCard: View {
                 .frame(width: 120, height: 120)
                 .cornerRadius(10)
                 .padding(.bottom, 5)
-            
+                .overlay(
+                    Button(action: {
+                        isLiked.toggle()
+                    }) {
+                        Image(systemName: isLiked ? "heart.fill" : "heart")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(isLiked ? .red : .white)
+                            .padding(5)
+                    }
+                    .background(Color.black.opacity(0.5))
+                    .clipShape(Circle())
+                    .padding([.top, .trailing], 10),
+                    alignment: .topTrailing
+                )
+
             Text("Product Name")
                 .font(.caption)
                 .fontWeight(.semibold)
+
+            Button(action: {}) {
+                Text("View Details")
+                    .font(.caption)
+                    .padding(5)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+            }
+            .padding(.top, 5)
         }
         .padding()
         .background(
