@@ -18,37 +18,55 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
+        NavigationView {
+            VStack {
+                Text("Welcome to PiwiConcierge!")
+                    .font(.largeTitle)
+                    .padding()
 
-            Text("Hello, world!")
+                Toggle("Show Immersive Space", isOn: $showImmersiveSpace)
+                    .font(.title)
+                    .frame(width: 360)
+                    .padding(24)
+                    .glassBackgroundEffect()
 
-            Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
-                .font(.title)
-                .frame(width: 360)
-                .padding(24)
-                .glassBackgroundEffect()
-        }
-        .padding()
-        .onChange(of: showImmersiveSpace) { _, newValue in
-            Task {
-                if newValue {
-                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
-                    case .opened:
-                        immersiveSpaceIsShown = true
-                    case .error, .userCancelled:
-                        fallthrough
-                    @unknown default:
+                NavigationLink(destination: PlaceholderView()) {
+                    Text("Start Shopping")
+                        .font(.title)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+            .onChange(of: showImmersiveSpace) { _, newValue in
+                Task {
+                    if newValue {
+                        switch await openImmersiveSpace(id: "ImmersiveSpace") {
+                        case .opened:
+                            immersiveSpaceIsShown = true
+                        case .error, .userCancelled:
+                            fallthrough
+                        @unknown default:
+                            immersiveSpaceIsShown = false
+                            showImmersiveSpace = false
+                        }
+                    } else if immersiveSpaceIsShown {
+                        await dismissImmersiveSpace()
                         immersiveSpaceIsShown = false
-                        showImmersiveSpace = false
                     }
-                } else if immersiveSpaceIsShown {
-                    await dismissImmersiveSpace()
-                    immersiveSpaceIsShown = false
                 }
             }
         }
+    }
+}
+
+struct PlaceholderView: View {
+    var body: some View {
+        Text("This is a placeholder for the ARView.")
+            .font(.largeTitle)
+            .padding()
     }
 }
 
