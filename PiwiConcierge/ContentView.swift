@@ -253,15 +253,8 @@ struct LottieView: UIViewRepresentable {
         let animationView = LottieAnimationView(animation: animation)
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .playOnce
-        
-        animationView.play { (finished) in
-            if finished {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 1 second delay
-                    animationView.play()
-                }
-            }
-        }
+        animationView.loopMode = .loop
+        animationView.play()
 
         view.addSubview(animationView)
         NSLayoutConstraint.activate([
