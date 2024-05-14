@@ -23,7 +23,7 @@ struct ContentView: View {
                 .padding()
 
             RecommendationSection()
-                .padding()
+                .padding(.horizontal)
 
             Spacer()
             
@@ -33,11 +33,9 @@ struct ContentView: View {
             Spacer()
         }
         .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(.systemBackground))
-                .shadow(radius: 10)
+            LinearGradient(gradient: Gradient(colors: [Color.white, Color(.systemGray6)]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
         )
-        .padding()
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {
                 if newValue {
@@ -62,6 +60,13 @@ struct ContentView: View {
 struct HeaderView: View {
     var body: some View {
         VStack {
+            Image(systemName: "bag.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 60, height: 60)
+                .foregroundColor(.blue)
+                .padding(.bottom, 10)
+            
             Text("Welcome to PiwiConcierge!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -73,6 +78,13 @@ struct HeaderView: View {
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing, .bottom])
         }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color(.systemBackground))
+                .shadow(radius: 10)
+        )
+        .padding(.horizontal)
     }
 }
 
@@ -91,13 +103,14 @@ struct RecommendationSection: View {
                         ProductCard()
                     }
                 }
+                .padding(.horizontal)
             }
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color(.secondarySystemBackground))
-                .shadow(radius: 5)
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color(.systemBackground))
+                .shadow(radius: 10)
         )
     }
 }
@@ -130,6 +143,12 @@ struct NavigationSection: View {
                     .cornerRadius(10)
             }
         }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color(.systemBackground))
+                .shadow(radius: 10)
+        )
     }
 }
 
