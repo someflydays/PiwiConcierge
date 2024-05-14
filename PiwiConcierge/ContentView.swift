@@ -28,7 +28,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                NavigationSection(showImmersiveSpace: $showImmersiveSpace)
+                NavigationSection()
                 
                 Spacer()
                 
@@ -108,18 +108,8 @@ struct RecommendationSection: View {
 }
 
 struct NavigationSection: View {
-    @Binding var showImmersiveSpace: Bool
-    
     var body: some View {
         VStack {
-            Toggle("Show Immersive Space", isOn: $showImmersiveSpace)
-                .font(.title2)
-                .frame(width: 300)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
-                .padding(.bottom, 20)
-
             NavigationLink(destination: PlaceholderView()) {
                 Text("Start Shopping")
                     .font(.title2)
