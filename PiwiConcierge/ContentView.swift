@@ -61,7 +61,7 @@ struct HeroSection: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            LottieView(filename: "shopping-animation") // Ensure the animation file exists in your project
+            LottieView(filename: "shopping-cart-animation")
                 .frame(height: 200)
                 .padding(.bottom, 10)
             
@@ -226,6 +226,37 @@ struct PlaceholderView: View {
             .font(.largeTitle)
             .padding()
     }
+}
+
+struct LottieView: UIViewRepresentable {
+    var filename: String
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+
+        // Access the JSON file from the main bundle
+        guard let path = Bundle.main.path(forResource: filename, ofType: "json") else {
+            print("Animation file not found")
+            return view
+        }
+
+        let animation = LottieAnimation.filepath(path)
+        let animationView = LottieAnimationView(animation: animation)
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
+
+        view.addSubview(animationView)
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            animationView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 #Preview(windowStyle: .automatic) {
