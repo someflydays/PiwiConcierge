@@ -18,16 +18,14 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        VStack {
-            HeaderView()
+        VStack(spacing: 20) {
+            HeroSection(showImmersiveSpace: $showImmersiveSpace)
                 .padding()
 
             RecommendationSection()
                 .padding(.horizontal)
 
-            Spacer()
-            
-            NavigationSection(showImmersiveSpace: $showImmersiveSpace)
+            NavigationMenu()
                 .padding()
             
             Spacer()
@@ -57,26 +55,34 @@ struct ContentView: View {
     }
 }
 
-struct HeaderView: View {
+struct HeroSection: View {
+    @Binding var showImmersiveSpace: Bool
+
     var body: some View {
-        VStack {
-            Image(systemName: "bag.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 60, height: 60)
-                .foregroundColor(.blue)
-                .padding(.bottom, 10)
-            
+        VStack(spacing: 10) {
             Text("Welcome to PiwiConcierge!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
-                .padding()
+                .padding(.top, 20)
 
             Text("Discover personalized product recommendations and enjoy an immersive shopping experience.")
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
-                .padding([.leading, .trailing, .bottom])
+                .padding(.horizontal)
+
+            Button(action: {
+                showImmersiveSpace.toggle()
+            }) {
+                Text("Enter Immersive Shopping")
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding(.top, 20)
         }
         .padding()
         .background(
@@ -96,9 +102,8 @@ struct RecommendationSection: View {
                 .fontWeight(.semibold)
                 .padding(.bottom, 10)
 
-            // Placeholder for product recommendations
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+                HStack(spacing: 15) {
                     ForEach(0..<5) { _ in
                         ProductCard()
                     }
@@ -115,40 +120,49 @@ struct RecommendationSection: View {
     }
 }
 
-struct NavigationSection: View {
-    @Binding var showImmersiveSpace: Bool
-    
+struct NavigationMenu: View {
     var body: some View {
-        VStack {
+        HStack {
             NavigationLink(destination: PlaceholderView()) {
-                Text("Start Shopping")
-                    .font(.title2)
-                    .padding()
-                    .frame(width: 300)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding(.bottom, 20)
+                VStack {
+                    Image(systemName: "list.bullet")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                        .padding()
 
-            Button(action: {
-                showImmersiveSpace.toggle()
-            }) {
-                Text("Enter Immersive Space")
-                    .font(.title2)
-                    .padding()
-                    .frame(width: 300)
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                    Text("Browse Categories")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color(.systemBackground))
+                        .shadow(radius: 10)
+                )
+            }
+
+            NavigationLink(destination: PlaceholderView()) {
+                VStack {
+                    Image(systemName: "cart.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                        .padding()
+
+                    Text("Your Collection")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color(.systemBackground))
+                        .shadow(radius: 10)
+                )
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 15)
-                .fill(Color(.systemBackground))
-                .shadow(radius: 10)
-        )
     }
 }
 
@@ -157,7 +171,7 @@ struct ProductCard: View {
         VStack {
             Rectangle()
                 .fill(Color.gray)
-                .frame(width: 100, height: 100)
+                .frame(width: 120, height: 120)
                 .cornerRadius(10)
                 .padding(.bottom, 5)
             
@@ -171,7 +185,6 @@ struct ProductCard: View {
                 .fill(Color.white)
                 .shadow(radius: 5)
         )
-        .padding([.leading, .trailing], 5)
     }
 }
 
