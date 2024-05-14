@@ -18,45 +18,41 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        NavigationView {
-            VStack {
-                HeaderView()
-                
-                Spacer()
-                
-                RecommendationSection()
-                
-                Spacer()
-                
-                NavigationSection()
-                
-                Spacer()
-                
-                ImmersiveExperienceSection(showImmersiveSpace: $showImmersiveSpace)
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(.systemBackground))
-                    .shadow(radius: 10)
-            )
-            .padding()
-            .onChange(of: showImmersiveSpace) { _, newValue in
-                Task {
-                    if newValue {
-                        switch await openImmersiveSpace(id: "ImmersiveSpace") {
-                        case .opened:
-                            immersiveSpaceIsShown = true
-                        case .error, .userCancelled:
-                            fallthrough
-                        @unknown default:
-                            immersiveSpaceIsShown = false
-                            showImmersiveSpace = false
-                        }
-                    } else if immersiveSpaceIsShown {
-                        await dismissImmersiveSpace()
+        VStack {
+            HeaderView()
+                .padding()
+
+            RecommendationSection()
+                .padding()
+
+            Spacer()
+            
+            NavigationSection(showImmersiveSpace: $showImmersiveSpace)
+                .padding()
+            
+            Spacer()
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(.systemBackground))
+                .shadow(radius: 10)
+        )
+        .padding()
+        .onChange(of: showImmersiveSpace) { _, newValue in
+            Task {
+                if newValue {
+                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
+                    case .opened:
+                        immersiveSpaceIsShown = true
+                    case .error, .userCancelled:
+                        fallthrough
+                    @unknown default:
                         immersiveSpaceIsShown = false
+                        showImmersiveSpace = false
                     }
+                } else if immersiveSpaceIsShown {
+                    await dismissImmersiveSpace()
+                    immersiveSpaceIsShown = false
                 }
             }
         }
@@ -103,11 +99,12 @@ struct RecommendationSection: View {
                 .fill(Color(.secondarySystemBackground))
                 .shadow(radius: 5)
         )
-        .padding([.leading, .trailing])
     }
 }
 
 struct NavigationSection: View {
+    @Binding var showImmersiveSpace: Bool
+    
     var body: some View {
         VStack {
             NavigationLink(destination: PlaceholderView()) {
@@ -119,23 +116,7 @@ struct NavigationSection: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
-        }
-    }
-}
-
-struct ImmersiveExperienceSection: View {
-    @Binding var showImmersiveSpace: Bool
-    
-    var body: some View {
-        VStack {
-            Text("Experience Shopping Like Never Before")
-                .font(.headline)
-                .padding(.bottom, 5)
-            
-            Text("Enter the immersive space to interact with high-fidelity digital twins of products.")
-                .font(.subheadline)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 20)
+            .padding(.bottom, 20)
 
             Button(action: {
                 showImmersiveSpace.toggle()
@@ -149,13 +130,6 @@ struct ImmersiveExperienceSection: View {
                     .cornerRadius(10)
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color(.secondarySystemBackground))
-                .shadow(radius: 5)
-        )
-        .padding([.leading, .trailing])
     }
 }
 
