@@ -32,8 +32,9 @@ struct ContentView: View {
             Spacer()
         }
         .background(
-            LinearGradient(gradient: Gradient(colors: [Color.white, Color(.systemGray6)]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
+                .opacity(0.15)
         )
         .onChange(of: showImmersiveSpace) { _, newValue in
             Task {
@@ -62,26 +63,26 @@ struct HeroSection: View {
     var body: some View {
         VStack(spacing: 10) {
             ZStack {
-                // Background image
+                // Icon background image
                 Image("icon-background")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 100) // Adjusted size
+                    .frame(height: 100)
                 
-                // Lottie animation
+                // Lottie animation (Shopping cart)
                 LottieView(filename: "shopping-cart-animation")
-                    .frame(height: 100) // Adjusted size
+                    .frame(height: 100)
             }
-            .padding(.bottom, 10)
+            .padding(.top, 50) // Padding above the icon
             
-            Text("Welcome to PiwiConcierge!")
-                .font(.largeTitle)
+            Text("Welcome to Piwi Concierge.")
+                .font(.extraLargeTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .padding(.top, 20)
 
             Text("Discover personalized product recommendations and enjoy an immersive shopping experience.")
-                .font(.subheadline)
+                .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
