@@ -10,18 +10,36 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
-    @State private var showImmersiveSpace = false
-    @State private var immersiveSpaceIsShown = false
     @State private var showDashboard = false
+    @State private var immersiveSpaceIsShown = false
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        if showDashboard {
-            DashboardView()
-        } else {
-            WelcomeView(showDashboard: $showDashboard)
+        VStack {
+            if showDashboard {
+                DashboardView()
+            } else {
+                WelcomeView(showDashboard: $showDashboard)
+            }
+        }
+        .onChange(of: immersiveSpaceIsShown) { _, newValue in
+            Task {
+                if newValue {
+                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
+                    case .opened:
+                        immersiveSpaceIsShown = true
+                    case .error, .userCancelled:
+                        fallthrough
+                    @unknown default:
+                        immersiveSpaceIsShown = false
+                    }
+                } else if immersiveSpaceIsShown {
+                    await dismissImmersiveSpace()
+                    immersiveSpaceIsShown = false
+                }
+            }
         }
     }
 }

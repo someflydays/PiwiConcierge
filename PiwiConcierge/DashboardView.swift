@@ -19,9 +19,8 @@ struct DashboardView: View {
             Spacer()
         }
         .background(
-            LinearGradient(gradient: Gradient(colors: [Color.cyan, Color.blue]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color.cyan.opacity(0.2), Color.blue.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
-                .opacity(0.15)
         )
     }
 }
