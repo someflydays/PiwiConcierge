@@ -1,0 +1,26 @@
+Most recent commit:
+
+b494bb9f764f716daa31057e5e57771748882ca0
+
+Design notes:
+
+I don't think the initial window should be an "initial window", if you know what I mean. The user has already clicked the icon to open the app. They shouldn't need to get past another screen before they can start gaining value from the app.
+
+When I open Amazon, I can see products right away. I can start searching, shopping, or accessing my account.
+
+The RecSys should be providing product recommendations as soon as the window is opened. The user does not need to enter the immersive space to gain value from the app. The RecSys provides massive value. This is a whole app idea on its own, and should be compatible with iOS and iPadOS (as well as via a browser).
+
+There should be a call to action that lets the user enter the immersive space. Keep in mind, I can stil display 3D digital twins in a window, before the user enters the immersive space.These may be incorporated into the iOS, iPadOS, and browser versions of the app. But there needs to be a button that the user clicks to enter the fully immersive experience.
+
+Could I potentially opt for just using the digital crown to ease into an immersive state? Or, should there be a button? If anything, at the very least, there needs to be a message that tells the user about this option.
+
+
+VIEWS:
+
+Introduction (Welcome) - for first time users, and upon updates
+
+Main UI - A window that displays recommendations represented as 3D volumes (digital twins)
+
+AR Immersive Space - AR storefronts, volumes (products) displayed in the user's immediate surroundings
+
+VR Immersive Space - VR storefronts, completely unbelievable shopping experiences (Swiss Alps)
