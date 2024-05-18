@@ -11,31 +11,37 @@ import RealityKitContent
 
 struct DashboardView: View {
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                HeaderView()
-                    .padding(.horizontal)
+        VStack(spacing: 0) {
+            NavigationMenu()
+                .padding(.horizontal)
+                .background(
+                    VisualEffectBlur(blurStyle: .systemThinMaterial)
+                        .edgesIgnoringSafeArea(.top)
+                )
 
-                FeaturedSection()
-                    .padding(.horizontal)
+            ScrollView {
+                VStack(spacing: 20) {
+                    HeaderView()
+                        .padding(.horizontal)
 
-                RecommendationCarousel()
-                    .padding(.horizontal)
+                    FeaturedSection()
+                        .padding(.horizontal)
 
-                CategoryNavigation()
-                    .padding(.horizontal)
+                    RecommendationCarousel()
+                        .padding(.horizontal)
 
-                PromotionsSection()
-                    .padding(.horizontal)
+                    CategoryNavigation()
+                        .padding(.horizontal)
 
-                Spacer(minLength: 20)
+                    PromotionsSection()
+                        .padding(.horizontal)
 
-                FooterMenu()
-                    .padding(.horizontal)
+                    Spacer(minLength: 20)
+                }
             }
         }
         .background(
-            LinearGradient(gradient: Gradient(colors: [Color.white, Color(.systemGray6)]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.8), Color(.systemGray6).opacity(0.8)]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
         )
     }
