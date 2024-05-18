@@ -10,15 +10,10 @@ import RealityKit
 import RealityKitContent
 
 struct DashboardView: View {
+    @State private var selectedTab = 0
+
     var body: some View {
         VStack(spacing: 0) {
-            NavigationMenu()
-                .padding(.horizontal)
-                .background(
-                    VisualEffectBlur(blurStyle: .systemThinMaterial)
-                        .edgesIgnoringSafeArea(.top)
-                )
-
             ScrollView {
                 VStack(spacing: 20) {
                     HeaderView()
@@ -39,6 +34,12 @@ struct DashboardView: View {
                     Spacer(minLength: 20)
                 }
             }
+
+            TabBar(selectedTab: $selectedTab)
+                .background(
+                    VisualEffectView(effect: UIBlurEffect(style: .systemThinMaterial))
+                        .edgesIgnoringSafeArea(.bottom)
+                )
         }
         .background(
             LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.8), Color(.systemGray6).opacity(0.8)]), startPoint: .top, endPoint: .bottom)
@@ -228,54 +229,47 @@ struct PromotionCard: View {
     }
 }
 
-struct FooterMenu: View {
+struct TabBar: View {
+    @Binding var selectedTab: Int
+
     var body: some View {
         HStack {
             Spacer()
-            VStack {
-                Image(systemName: "house.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30, height: 30)
-                Text("Home")
-                    .font(.footnote)
-                    .foregroundColor(.primary)
-            }
+            TabBarButton(icon: "house.fill", title: "Home", tab: 0, selectedTab: $selectedTab)
             Spacer()
-            VStack {
-                Image(systemName: "magnifyingglass")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30, height: 30)
-                Text("Search")
-                    .font(.footnote)
-                    .foregroundColor(.primary)
-            }
+            TabBarButton(icon: "magnifyingglass", title: "Search", tab: 1, selectedTab: $selectedTab)
             Spacer()
-            VStack {
-                Image(systemName: "cart.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30, height: 30)
-                Text("Cart")
-                    .font(.footnote)
-                    .foregroundColor(.primary)
-            }
+            TabBarButton(icon: "cart.fill", title: "Cart", tab: 2, selectedTab: $selectedTab)
             Spacer()
-            VStack {
-                Image(systemName: "person.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30, height: 30)
-                Text("Profile")
-                    .font(.footnote)
-                    .foregroundColor(.primary)
-            }
+            TabBarButton(icon: "person.fill", title: "Profile", tab: 3, selectedTab: $selectedTab)
             Spacer()
         }
         .padding()
         .background(Color(.systemGray6).opacity(0.8))
         .cornerRadius(10)
+    }
+}
+
+struct TabBarButton: View {
+    let icon: String
+    let title: String
+    let tab: Int
+    @Binding var selectedTab: Int
+
+    var body: some View {
+        VStack {
+            Image(systemName: icon)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 30, height: 30)
+                .foregroundColor(selectedTab == tab ? .blue : .primary)
+            Text(title)
+                .font(.footnote)
+                .foregroundColor(selectedTab == tab ? .blue : .primary)
+        }
+        .onTapGesture {
+            selectedTab = tab
+        }
     }
 }
 
