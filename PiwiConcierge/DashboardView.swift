@@ -13,96 +13,78 @@ struct DashboardView: View {
     @State private var selectedTab = 0
 
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                ScrollView {
-                    VStack(spacing: 20) {
-                        HeaderView()
-                            .padding(.horizontal)
-
-                        FeaturedSection()
-                            .padding(.horizontal)
-
-                        RecommendationCarousel()
-                            .padding(.horizontal)
-
-                        CategoryNavigation()
-                            .padding(.horizontal)
-
-                        PromotionsSection()
-                            .padding(.horizontal)
-
-                        Spacer(minLength: 20)
-                    }
+        TabView(selection: $selectedTab) {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
                 }
-            }
-            .background(
-                LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.8), Color(.systemGray6).opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-            )
+                .tag(0)
 
-            // FloatingPanel for the navigation controls
-            FloatingPanel(selectedTab: $selectedTab)
+            SearchView()
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+                .tag(1)
+
+            CartView()
+                .tabItem {
+                    Label("Cart", systemImage: "cart.fill")
+                }
+                .tag(2)
+
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.fill")
+                }
+                .tag(3)
+        }
+        .background(
+            LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.8), Color(.systemGray6).opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+        )
+    }
+}
+
+struct HomeView: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                HeaderView()
+                    .padding(.horizontal)
+
+                FeaturedSection()
+                    .padding(.horizontal)
+
+                RecommendationCarousel()
+                    .padding(.horizontal)
+
+                CategoryNavigation()
+                    .padding(.horizontal)
+
+                PromotionsSection()
+                    .padding(.horizontal)
+
+                Spacer(minLength: 20)
+            }
         }
     }
 }
 
-struct FloatingPanel: View {
-    @Binding var selectedTab: Int
-
+struct SearchView: View {
     var body: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
-
-                VStack(spacing: 20) {
-                    FloatingPanelButton(icon: "house.fill", title: "Home", tab: 0, selectedTab: $selectedTab)
-                    FloatingPanelButton(icon: "magnifyingglass", title: "Search", tab: 1, selectedTab: $selectedTab)
-                    FloatingPanelButton(icon: "cart.fill", title: "Cart", tab: 2, selectedTab: $selectedTab)
-                    FloatingPanelButton(icon: "person.fill", title: "Profile", tab: 3, selectedTab: $selectedTab)
-                }
-                .padding()
-                .background(Color(.systemBackground).opacity(0.8))
-                .cornerRadius(10)
-                .shadow(radius: 5)
-                .padding()
-            }
-        }
-        .padding(.trailing, 20)
+        Text("Search View")
     }
 }
 
-struct FloatingPanelButton: View {
-    let icon: String
-    let title: String
-    let tab: Int
-    @Binding var selectedTab: Int
-    @State private var isHovered: Bool = false
-
+struct CartView: View {
     var body: some View {
-        HStack {
-            Image(systemName: icon)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 30, height: 30)
-                .foregroundColor(selectedTab == tab ? .blue : .primary)
+        Text("Cart View")
+    }
+}
 
-            if isHovered {
-                Text(title)
-                    .font(.headline)
-                    .foregroundColor(selectedTab == tab ? .blue : .primary)
-            }
-        }
-        .padding(10)
-        .background(selectedTab == tab ? Color(.systemGray4).opacity(0.5) : Color.clear)
-        .cornerRadius(10)
-        .onTapGesture {
-            selectedTab = tab
-        }
-        .onHover { hovering in
-            isHovered = hovering
-        }
+struct ProfileView: View {
+    var body: some View {
+        Text("Profile View")
     }
 }
 
