@@ -32,7 +32,6 @@ struct WelcomeView: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 20)
                 .shadow(radius: 2)
-            
 
             Text("Discover personalized product recommendations and enjoy an immersive shopping experience.")
                 .font(.headline)
@@ -43,7 +42,7 @@ struct WelcomeView: View {
 
             Button(action: {
                 withAnimation {
-                    showDashboard.toggle()
+                    showDashboard = true
                 }
             }) {
                 Text("Start")
