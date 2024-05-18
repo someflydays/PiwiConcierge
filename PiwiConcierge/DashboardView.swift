@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import RealityKit
+import RealityKitContent
 
 struct DashboardView: View {
     var body: some View {
@@ -87,9 +89,7 @@ struct FeaturedItemCard: View {
 
     var body: some View {
         VStack {
-            Image("featured-\(index)")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+            Model3D(named: "featured-model-\(index)", bundle: realityKitContentBundle)
                 .frame(width: 150, height: 150)
                 .cornerRadius(10)
                 .shadow(radius: 5)
@@ -120,8 +120,8 @@ struct RecommendationCarousel: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(0..<5) { index in
-                        InteractiveProductCard()
+                    ForEach(0..<3) { index in
+                        InteractiveProductCard(index: index)
                     }
                 }
                 .padding(.horizontal)
