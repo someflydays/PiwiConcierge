@@ -12,51 +12,70 @@ struct WelcomeView: View {
     @Binding var showDashboard: Bool
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 20) {
+            Spacer()
+
             ZStack {
                 // Icon background image
                 Image("icon-background")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 100)
+                    .frame(height: 150)
                 
                 // Lottie animation (Shopping cart)
                 LottieView(filename: "shopping-cart-animation")
-                    .frame(height: 100)
+                    .frame(height: 150)
             }
-            .padding(.top, 50) // Padding above the icon
-            
-            Text("Welcome to Piwi Concierge.")
+
+            Text("Welcome to Piwi Concierge")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .padding(.top, 20)
+                .shadow(radius: 2)
+            
 
             Text("Discover personalized product recommendations and enjoy an immersive shopping experience.")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+                .padding(.top, 10)
+                .foregroundColor(.white)
 
             Button(action: {
-                showDashboard.toggle()
+                withAnimation {
+                    showDashboard.toggle()
+                }
             }) {
-                Text("Enter Immersive Shopping")
+                Text("Start")
                     .font(.title2)
+                    .fontWeight(.semibold)
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .frame(maxWidth: 150)
+                    .background(
+                        Color.blue.opacity(0.8)
+                    )
                     .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .cornerRadius(100)
+                    .shadow(radius: 5)
             }
+            .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
             .padding(.top, 20)
+            .padding(.horizontal)
+
+            Spacer()
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 15)
+            RoundedRectangle(cornerRadius: 20)
                 .fill(Color(.systemBackground))
                 .shadow(radius: 10)
         )
         .padding(.horizontal)
+        .background(
+            LinearGradient(gradient: Gradient(colors: [Color.cyan.opacity(0.4), Color.blue.opacity(0.4)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 }
 
