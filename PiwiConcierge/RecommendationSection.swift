@@ -17,8 +17,8 @@ struct RecommendationSection: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(0..<5) { _ in
-                        InteractiveProductCard(index: $0)
+                    ForEach(0..<5) { index in
+                        InteractiveProductCard(index: index)
                     }
                 }
                 .padding(.horizontal)
