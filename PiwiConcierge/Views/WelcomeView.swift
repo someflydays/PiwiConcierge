@@ -22,18 +22,18 @@ struct WelcomeView: View {
                     .frame(height: 150)
                 
                 // Lottie animation (Shopping cart)
-                LottieView(filename: "shopping-cart-animation", delay: 2.0)
+                LottieView(filename: "shopping-cart-animation")
                     .frame(height: 150)
             }
 
-            Text("Welcome to Piwi Concierge")
+            Text("Welcome to Piwi Concierge.")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .padding(.top, 20)
                 .shadow(radius: 2)
 
-            Text("Discover personalized product recommendations and enjoy an immersive shopping experience.")
+            Text("Discover personalized product recommendations.")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -55,7 +55,6 @@ struct WelcomeView: View {
                     )
                     .foregroundColor(.white)
                     .cornerRadius(100)
-                    .shadow(radius: 5)
             }
             .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
             .padding(.top, 20)

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import RealityKit
 
 struct PromotionCard: View {
     let index: Int
-    
+
     var body: some View {
         VStack {
             Image("promotion-\(index)")
@@ -18,16 +19,18 @@ struct PromotionCard: View {
                 .frame(width: 150, height: 150)
                 .cornerRadius(10)
                 .shadow(radius: 5)
+
             Text("Promotion \(index + 1)")
                 .font(.headline)
                 .foregroundColor(.primary)
+
             Text("Save 20%")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }
         .frame(width: 150)
         .padding()
-        .backgroundColor(.systemBackground))
+        .background(Color(.systemBackground))
         .cornerRadius(15)
         .shadow(radius: 5)
     }

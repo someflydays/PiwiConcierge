@@ -1,12 +1,6 @@
-//
-//  FeaturedItemCard.swift
-//  PiwiConcierge
-//
-//  Created by Derek Martin on 5/20/24.
-//
-
 import SwiftUI
 import RealityKit
+import RealityKitContent
 
 struct FeaturedItemCard: View {
     let index: Int
