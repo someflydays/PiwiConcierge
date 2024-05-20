@@ -38,10 +38,7 @@ struct DashboardView: View {
                 }
                 .tag(3)
         }
-        .background(
-            LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.8), Color(.systemGray6).opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-        )
+        ///.background(LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.8), Color(.systemGray6).opacity(0.8)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
     }
 }
 
@@ -92,10 +89,11 @@ struct HeaderView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Welcome back, Derek!")
+                Text("Welcome back, Derek!") // Change this to "Welcome back, [user's first name]!" #TODO
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
+                    .padding() // I added this
                 Text("What would you like to discover today?")
                     .font(.headline)
                     .foregroundColor(.secondary)
