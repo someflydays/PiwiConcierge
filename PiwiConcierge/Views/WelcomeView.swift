@@ -22,18 +22,18 @@ struct WelcomeView: View {
                     .frame(height: 150)
                 
                 // Lottie animation (Shopping cart)
-                LottieView(filename: "shopping-cart-animation")
+                LottieView(filename: "shopping-cart-animation", delay: 2.0)
                     .frame(height: 150)
             }
 
-            Text("Welcome to Piwi Concierge.")
+            Text("Welcome to Piwi Concierge")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .padding(.top, 20)
                 .shadow(radius: 2)
 
-            Text("Discover personalized product recommendations.")
+            Text("Discover personalized product recommendations and enjoy an immersive shopping experience.")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -51,11 +51,11 @@ struct WelcomeView: View {
                     .padding()
                     .frame(maxWidth: 150)
                     .background(
-                        Color.blue.opacity(1.0)
+                        Color.blue.opacity(0.8)
                     )
                     .foregroundColor(.white)
                     .cornerRadius(100)
-                    ///.shadow(radius: 5)
+                    .shadow(radius: 5)
             }
             .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
             .padding(.top, 20)
@@ -64,6 +64,11 @@ struct WelcomeView: View {
             Spacer()
         }
         .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(.systemBackground))
+                .shadow(radius: 10)
+        )
         .padding(.horizontal)
         .background(
             LinearGradient(gradient: Gradient(colors: [Color.cyan.opacity(0.4), Color.blue.opacity(0.4)]), startPoint: .topLeading, endPoint: .bottomTrailing)
