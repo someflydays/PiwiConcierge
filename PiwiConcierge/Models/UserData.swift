@@ -5,8 +5,9 @@
 //  Created by Derek Martin on 5/20/24.
 //
 
-import SwiftUI
+import Foundation
 
 class UserData: ObservableObject {
-    @Published var profile = Profile(firstName: "User", lastName: "", email: "user@example.com", profilePicture: "profile-picture")
+    @Published var userName: String = "Derek" // Default username for example
+    // Add other user-related properties here
 }

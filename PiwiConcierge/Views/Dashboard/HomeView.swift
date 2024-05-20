@@ -8,28 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var userData: UserData
+    @ObservedObject var userData: UserData
 
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                HeaderView()
-                    .padding(.horizontal)
-
-                FeaturedSection()
-                    .padding(.horizontal)
-
+                // Only display the RecommendationCarousel for now
                 RecommendationCarousel()
                     .padding(.horizontal)
-
-                CategoryNavigation()
-                    .padding(.horizontal)
-
-                PromotionsSection()
-                    .padding(.horizontal)
-
-                Spacer(minLength: 20)
             }
+            .padding()
         }
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView(userData: UserData())
     }
 }

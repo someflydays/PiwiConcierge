@@ -1,11 +1,6 @@
-//
-//  RecommendationCarousel.swift
-//  PiwiConcierge
-//
-//  Created by Derek Martin on 5/20/24.
-//
-
 import SwiftUI
+import RealityKit
+import RealityKitContent
 
 struct RecommendationCarousel: View {
     var body: some View {
@@ -14,6 +9,7 @@ struct RecommendationCarousel: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
+                .padding(.leading)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {

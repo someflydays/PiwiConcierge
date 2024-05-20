@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
-import RealityKit
-import RealityKitContent
 
 struct ContentView: View {
     @State private var showDashboard = false
+    @ObservedObject var userData = UserData()
 
     var body: some View {
         if showDashboard {
-            DashboardView()
+            DashboardView(userData: userData)
         } else {
             WelcomeView(showDashboard: $showDashboard)
         }

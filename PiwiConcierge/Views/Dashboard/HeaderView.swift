@@ -13,7 +13,7 @@ struct HeaderView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Welcome back, \(userData.profile.firstName)!")
+                Text("Welcome back, \(userData.userName)!")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
@@ -22,12 +22,6 @@ struct HeaderView: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
-            Image(userData.profile.profilePicture)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-                .shadow(radius: 5)
         }
     }
 }

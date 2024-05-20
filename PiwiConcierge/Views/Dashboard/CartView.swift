@@ -9,19 +9,7 @@ import SwiftUI
 
 struct CartView: View {
     var body: some View {
-        VStack {
-            Text("Cart")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding()
-
-            Text("Your cart is currently empty.")
-                .font(.headline)
-                .foregroundColor(.secondary)
-
-            Spacer()
-        }
-        .padding()
+        Text("Cart View")
     }
 }
 

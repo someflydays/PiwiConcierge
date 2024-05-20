@@ -11,24 +11,12 @@ struct ProfileView: View {
     @ObservedObject var userData: UserData
 
     var body: some View {
-        VStack {
-            Image(userData.profile.profilePicture)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-                .shadow(radius: 5)
+        Text("Welcome back, \(userData.userName)!")
+    }
+}
 
-            Text("\(userData.profile.firstName) \(userData.profile.lastName)")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-
-            Text(userData.profile.email)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-
-            Spacer()
-        }
-        .padding()
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView(userData: UserData())
     }
 }

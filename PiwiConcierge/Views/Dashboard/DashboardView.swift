@@ -11,11 +11,11 @@ import RealityKitContent
 
 struct DashboardView: View {
     @State private var selectedTab = 0
-    @StateObject var userData = UserData()
+    @ObservedObject var userData: UserData
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
+            HomeView(userData: userData)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
@@ -39,6 +39,11 @@ struct DashboardView: View {
                 }
                 .tag(3)
         }
-        .environmentObject(userData)
+    }
+}
+
+struct DashboardView_Previews: PreviewProvider {
+    static var previews: some View {
+        DashboardView(userData: UserData())
     }
 }
