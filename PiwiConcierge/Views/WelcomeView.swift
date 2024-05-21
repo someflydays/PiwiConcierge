@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @Binding var showDashboard: Bool
+    @ObservedObject var userData: UserData
 
     var body: some View {
         VStack(spacing: 20) {
@@ -26,7 +27,7 @@ struct WelcomeView: View {
                     .frame(height: 150)
             }
 
-            Text("Welcome to Piwi Concierge.")
+            Text("Welcome, \(userData.userName)!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
@@ -78,6 +79,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView(showDashboard: .constant(false))
+        WelcomeView(showDashboard: .constant(false), userData: UserData())
     }
 }

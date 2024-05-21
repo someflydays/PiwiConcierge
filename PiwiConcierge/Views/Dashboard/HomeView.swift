@@ -13,8 +13,16 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Only display the RecommendationCarousel for now
+                Text("Recommended for You")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding()
+
                 RecommendationCarousel()
+                    .padding(.horizontal)
+
+                // Add grouped recommendations below
+                GroupedRecommendations()
                     .padding(.horizontal)
             }
             .padding()

@@ -6,8 +6,8 @@
 //
 
 import Foundation
+import Combine
 
 class UserData: ObservableObject {
-    @Published var userName: String = "Derek" // Default username for example
-    // Add other user-related properties here
+    @Published var userName: String = "Derek" // Replace with dynamic user data fetching
 }
