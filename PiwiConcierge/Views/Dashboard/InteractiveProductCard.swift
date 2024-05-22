@@ -17,6 +17,7 @@ struct InteractiveProductCard: View {
     let onCreateCollection: () -> Void
     let onSaveForLater: () -> Void
 
+    @State private var isSaved: Bool = false // Track saved state
     @State private var modelScale: CGFloat = 1.0
     @State private var modelRotation: Angle = .zero
     @State private var isDragging: Bool = false
@@ -102,8 +103,11 @@ struct InteractiveProductCard: View {
                         .cornerRadius(10)
                 }
 
-                Button(action: onSaveForLater) {
-                    Image(systemName: "bookmark")
+                Button(action: {
+                    isSaved.toggle()
+                    onSaveForLater()
+                }) {
+                    Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
