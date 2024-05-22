@@ -10,37 +10,105 @@ import RealityKit
 import RealityKitContent
 
 struct InteractiveProductCard: View {
-    let index: Int
+    let product: Product
+    let onSwipeLeft: () -> Void
+    let onSwipeRight: () -> Void
+    let onAddToCart: () -> Void
+    let onCreateCollection: () -> Void
+
+    @State private var modelScale: CGFloat = 1.0
+    @State private var modelRotation: Angle = .zero
+    @State private var isDragging: Bool = false
 
     var body: some View {
-        NavigationLink(destination: ProductDetailView(productIndex: index)) {
-            VStack {
-                Model3D(named: "Placeholder-model-\(index)", bundle: realityKitContentBundle)
-                    .frame(height: 250) // Adjusted height
+        VStack {
+            ZStack {
+                Model3D(named: product.modelName, bundle: realityKitContentBundle)
+                    .frame(height: 300 * modelScale) // Adjust height based on scale
+                    .rotationEffect(modelRotation) // Apply rotation
                     .cornerRadius(15)
                     .shadow(radius: 5)
+                    .gesture(DragGesture()
+                        .onEnded { value in
+                            if value.translation.width < -100 {
+                                onSwipeLeft()
+                            } else if value.translation.width > 100 {
+                                onSwipeRight()
+                            }
+                        }
+                    )
+                    .gesture(MagnificationGesture()
+                        .onChanged { value in
+                            modelScale = value
+                        }
+                    )
+                    .gesture(RotationGesture()
+                        .onChanged { value in
+                            modelRotation = value
+                        }
+                    )
 
-                Text("Product Name \(index + 1)")
-                    .font(.headline)
-                    .foregroundColor(.primary)
-                    .padding(.top, 5)
-
-                Text("$99.99")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                // Repositioning button
+                Button(action: {
+                    isDragging.toggle()
+                }) {
+                    Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                        .padding()
+                        .background(Color.white.opacity(0.7))
+                        .clipShape(Circle())
+                        .shadow(radius: 5)
+                }
+                .gesture(isDragging ? DragGesture()
+                    .onChanged { value in
+                        // Update model position based on drag
+                    }
+                    .onEnded { _ in
+                        isDragging = false
+                    }
+                : nil)
+                .offset(x: 100, y: 100) // Adjust position relative to the model
             }
-            .padding()
-            .background(Color(.systemBackground))
-            .cornerRadius(15)
-            .shadow(radius: 5)
-            .frame(width: 250, height: 400) // Ensure consistent size
+
+            Text(product.name)
+                .font(.headline)
+                .foregroundColor(.primary)
+                .padding(.top, 5)
+
+            Text("$\(product.price, specifier: "%.2f")")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+
+            HStack {
+                Button(action: onAddToCart) {
+                    Text("Add to Cart")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+
+                Button(action: onCreateCollection) {
+                    Text("Create Collection")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding(.top, 10)
         }
-        .buttonStyle(PlainButtonStyle())
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(15)
+        .shadow(radius: 5)
+        .frame(width: 300, height: 450)
     }
 }
 
 struct InteractiveProductCard_Previews: PreviewProvider {
     static var previews: some View {
-        InteractiveProductCard(index: 0)
+        InteractiveProductCard(product: Product(name: "Sample Product", price: 99.99, modelName: "Placeholder-model-0"), onSwipeLeft: {}, onSwipeRight: {}, onAddToCart: {}, onCreateCollection: {})
     }
 }

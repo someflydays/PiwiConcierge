@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
-import RealityKit
-import RealityKitContent
 
 struct DashboardView: View {
-    @State private var selectedTab = 0
     @ObservedObject var userData: UserData
 
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView {
             HomeView(userData: userData)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")

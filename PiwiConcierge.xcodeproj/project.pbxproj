@@ -41,6 +41,7 @@
 		656A1C622BF31067000A86A0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 656A1C612BF31067000A86A0 /* Lottie */; };
 		65FE1EC52BFC3D92006BA50B /* GroupedRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE1EC42BFC3D92006BA50B /* GroupedRecommendations.swift */; };
 		65FE1EC72BFC3DDF006BA50B /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE1EC62BFC3DDF006BA50B /* ProductDetailView.swift */; };
+		65FE1EC92BFD9417006BA50B /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE1EC82BFD9417006BA50B /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		656A1C542BF2A27D000A86A0 /* PiwiConciergeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiwiConciergeTests.swift; sourceTree = "<group>"; };
 		65FE1EC42BFC3D92006BA50B /* GroupedRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedRecommendations.swift; sourceTree = "<group>"; };
 		65FE1EC62BFC3DDF006BA50B /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		65FE1EC82BFD9417006BA50B /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,10 +137,11 @@
 		6532C2932BFC086400DEEA14 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				6532C2882BFC086400DEEA14 /* DashboardView.swift */,
+				65FE1EC82BFD9417006BA50B /* Product.swift */,
 				6532C2852BFC086400DEEA14 /* CartView.swift */,
 				6532C2862BFC086400DEEA14 /* CategoryCard.swift */,
 				6532C2872BFC086400DEEA14 /* CategoryNavigation.swift */,
-				6532C2882BFC086400DEEA14 /* DashboardView.swift */,
 				6532C2892BFC086400DEEA14 /* FeaturedItemCard.swift */,
 				6532C28A2BFC086400DEEA14 /* FeaturedSection.swift */,
 				6532C28B2BFC086400DEEA14 /* HeaderView.swift */,
@@ -360,6 +363,7 @@
 				65FE1EC52BFC3D92006BA50B /* GroupedRecommendations.swift in Sources */,
 				6532C2A62BFC086500DEEA14 /* CartView.swift in Sources */,
 				6532C29E2BFC086500DEEA14 /* ContentView.swift in Sources */,
+				65FE1EC92BFD9417006BA50B /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

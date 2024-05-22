@@ -11,7 +11,13 @@ struct ProfileView: View {
     @ObservedObject var userData: UserData
 
     var body: some View {
-        Text("Welcome back, \(userData.userName)!")
+        VStack {
+            Text("Profile View for \(userData.userName)")
+                .font(.largeTitle)
+                .padding()
+
+            // Add more profile-related UI here
+        }
     }
 }
 

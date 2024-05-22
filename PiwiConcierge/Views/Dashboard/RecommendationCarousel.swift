@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import RealityKit
-import RealityKitContent
 
 struct RecommendationCarousel: View {
+    @ObservedObject var userData: UserData
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Recommended for You")
@@ -19,21 +19,41 @@ struct RecommendationCarousel: View {
                 .padding(.leading)
 
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) { // Increased spacing
-                    ForEach(0..<3) { index in
-                        InteractiveProductCard(index: index)
-                            .frame(width: 250, height: 400) // Increased size
+                HStack(spacing: 15) {
+                    ForEach(userData.recommendedProducts) { product in
+                        InteractiveProductCard(
+                            product: product,
+                            onSwipeLeft: { handleSwipeLeft(product: product) },
+                            onSwipeRight: { handleSwipeRight(product: product) },
+                            onAddToCart: { handleAddToCart(product: product) },
+                            onCreateCollection: { handleCreateCollection(product: product) }
+                        )
                     }
                 }
                 .padding(.horizontal)
             }
         }
-        .padding(.vertical)
+    }
+
+    private func handleSwipeLeft(product: Product) {
+        // Logic for disliking a product
+    }
+
+    private func handleSwipeRight(product: Product) {
+        // Logic for liking a product
+    }
+
+    private func handleAddToCart(product: Product) {
+        // Logic for adding a product to the cart
+    }
+
+    private func handleCreateCollection(product: Product) {
+        // Logic for creating a collection with complementary products
     }
 }
 
 struct RecommendationCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        RecommendationCarousel()
+        RecommendationCarousel(userData: UserData())
     }
 }

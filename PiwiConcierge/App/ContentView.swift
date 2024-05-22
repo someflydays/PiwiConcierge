@@ -5,13 +5,6 @@
 //  Created by Derek Martin on 5/13/24.
 //
 
-//
-//  ContentView.swift
-//  PiwiConcierge
-//
-//  Created by Derek Martin on 5/13/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {

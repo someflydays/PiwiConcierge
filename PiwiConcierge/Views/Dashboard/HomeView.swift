@@ -6,27 +6,55 @@
 //
 
 import SwiftUI
+import RealityKit
 
 struct HomeView: View {
     @ObservedObject var userData: UserData
+    @State private var currentProductIndex = 0 // Track the current product index
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                // Header with personalized greeting
-                ///HeaderView(userName: userData.userName)
-                    ///.padding(.horizontal)
+        VStack {
+            Spacer()
+            // Header with personalized greeting
+            HeaderView(userName: userData.userName)
+                .padding(.horizontal)
 
-                // Display the RecommendationCarousel
-                RecommendationCarousel()
-                    .padding(.horizontal)
-
-                // Add grouped recommendations below
-                GroupedRecommendations()
-                    .padding(.horizontal)
+            // Display one product at a time
+            if userData.recommendedProducts.indices.contains(currentProductIndex) {
+                InteractiveProductCard(
+                    product: userData.recommendedProducts[currentProductIndex],
+                    onSwipeLeft: handleSwipeLeft,
+                    onSwipeRight: handleSwipeRight,
+                    onAddToCart: handleAddToCart,
+                    onCreateCollection: handleCreateCollection
+                )
+                .padding(.horizontal)
+            } else {
+                Text("No more recommendations")
+                    .font(.title)
+                    .foregroundColor(.secondary)
             }
-            .padding()
+            Spacer()
         }
+        .padding()
+    }
+
+    private func handleSwipeLeft() {
+        // Logic for disliking a product
+        currentProductIndex += 1
+    }
+
+    private func handleSwipeRight() {
+        // Logic for liking a product
+        currentProductIndex += 1
+    }
+
+    private func handleAddToCart() {
+        // Logic for adding a product to the cart
+    }
+
+    private func handleCreateCollection() {
+        // Logic for creating a collection with complementary products
     }
 }
 
