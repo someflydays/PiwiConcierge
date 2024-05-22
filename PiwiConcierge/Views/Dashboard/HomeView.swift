@@ -61,7 +61,7 @@ struct HomeView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 24, height: 24)
                                     .padding()
-                                    .background(Color.white)
+                                    .foregroundColor(.white)
                                     .clipShape(Circle())
                                     .shadow(radius: 5)
                             }
@@ -97,12 +97,12 @@ struct HomeView: View {
             if userData.currentIndex > 0 {
                 HStack {
                     Button(action: { userData.showPreviousProduct() }) {
-                        Image(systemName: "arrow.left.circle.fill")
+                        Image(systemName: "chevron.left")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40, height: 40)
                             .padding()
-                            .background(Color.white)
+                            .foregroundColor(.white)
                             .clipShape(Circle())
                             .shadow(radius: 5)
                     }
