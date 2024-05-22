@@ -57,11 +57,12 @@ struct InteractiveProductCard: View {
                 Button(action: {
                     isDragging.toggle()
                 }) {
-                    Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                    Image(systemName: "cube")
                         .padding()
-                        .background(Color.white.opacity(0.7))
+                        //.background(Color.white.opacity(0.7))
+                        .foregroundColor(.white)
                         .clipShape(Circle())
-                        .shadow(radius: 5)
+                        //.shadow(radius: 5)
                 }
                 .gesture(isDragging ? DragGesture()
                     .onChanged { value in

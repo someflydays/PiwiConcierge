@@ -63,7 +63,7 @@ struct HomeView: View {
                                     .padding()
                                     .foregroundColor(.white)
                                     .clipShape(Circle())
-                                    .shadow(radius: 5)
+                                    //.shadow(radius: 5)
                             }
                         }
                         .padding(.top, 10)
