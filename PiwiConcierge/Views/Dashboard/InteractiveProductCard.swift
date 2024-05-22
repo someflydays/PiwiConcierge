@@ -15,6 +15,7 @@ struct InteractiveProductCard: View {
     let onSwipeRight: () -> Void
     let onAddToCart: () -> Void
     let onCreateCollection: () -> Void
+    let onSaveForLater: () -> Void
 
     @State private var modelScale: CGFloat = 1.0
     @State private var modelRotation: Angle = .zero
@@ -31,9 +32,13 @@ struct InteractiveProductCard: View {
                     .gesture(DragGesture()
                         .onEnded { value in
                             if value.translation.width < -100 {
-                                onSwipeLeft()
+                                withAnimation {
+                                    onSwipeLeft()
+                                }
                             } else if value.translation.width > 100 {
-                                onSwipeRight()
+                                withAnimation {
+                                    onSwipeRight()
+                                }
                             }
                         }
                     )
@@ -96,6 +101,17 @@ struct InteractiveProductCard: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
+
+                Button(action: onSaveForLater) {
+                    Image(systemName: "bookmark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                        .padding()
+                        .background(Color.white)
+                        .clipShape(Circle())
+                        .shadow(radius: 5)
+                }
             }
             .padding(.top, 10)
         }
@@ -109,6 +125,13 @@ struct InteractiveProductCard: View {
 
 struct InteractiveProductCard_Previews: PreviewProvider {
     static var previews: some View {
-        InteractiveProductCard(product: Product(name: "Sample Product", price: 99.99, modelName: "Placeholder-model-0"), onSwipeLeft: {}, onSwipeRight: {}, onAddToCart: {}, onCreateCollection: {})
+        InteractiveProductCard(
+            product: Product(name: "Sample Product", price: 99.99, modelName: "Placeholder-model-0"),
+            onSwipeLeft: {},
+            onSwipeRight: {},
+            onAddToCart: {},
+            onCreateCollection: {},
+            onSaveForLater: {}
+        )
     }
 }

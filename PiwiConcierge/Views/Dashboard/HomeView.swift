@@ -11,6 +11,7 @@ import RealityKit
 struct HomeView: View {
     @ObservedObject var userData: UserData
     @State private var currentProductIndex = 0 // Track the current product index
+    @State private var previousProductIndices: [Int] = [] // Track previously seen product indices
 
     var body: some View {
         VStack {
@@ -26,7 +27,8 @@ struct HomeView: View {
                     onSwipeLeft: handleSwipeLeft,
                     onSwipeRight: handleSwipeRight,
                     onAddToCart: handleAddToCart,
-                    onCreateCollection: handleCreateCollection
+                    onCreateCollection: handleCreateCollection,
+                    onSaveForLater: handleSaveForLater
                 )
                 .padding(.horizontal)
             } else {
@@ -34,6 +36,23 @@ struct HomeView: View {
                     .font(.title)
                     .foregroundColor(.secondary)
             }
+
+            HStack {
+                if !previousProductIndices.isEmpty {
+                    Button(action: handleBack) {
+                        Text("Back")
+                            .font(.headline)
+                            .padding()
+                            .background(Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal)
+                }
+
+                Spacer()
+            }
+
             Spacer()
         }
         .padding()
@@ -41,12 +60,20 @@ struct HomeView: View {
 
     private func handleSwipeLeft() {
         // Logic for disliking a product
+        previousProductIndices.append(currentProductIndex)
         currentProductIndex += 1
     }
 
     private func handleSwipeRight() {
         // Logic for liking a product
+        previousProductIndices.append(currentProductIndex)
         currentProductIndex += 1
+    }
+
+    private func handleBack() {
+        if let lastIndex = previousProductIndices.popLast() {
+            currentProductIndex = lastIndex
+        }
     }
 
     private func handleAddToCart() {
@@ -55,6 +82,10 @@ struct HomeView: View {
 
     private func handleCreateCollection() {
         // Logic for creating a collection with complementary products
+    }
+
+    private func handleSaveForLater() {
+        // Logic for saving a product for later
     }
 }
 

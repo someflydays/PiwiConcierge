@@ -26,13 +26,15 @@ struct GroupedRecommendations: View {
                             onSwipeLeft: { handleSwipeLeft(product: product) },
                             onSwipeRight: { handleSwipeRight(product: product) },
                             onAddToCart: { handleAddToCart(product: product) },
-                            onCreateCollection: { handleCreateCollection(product: product) }
+                            onCreateCollection: { handleCreateCollection(product: product) },
+                            onSaveForLater: { handleSaveForLater(product: product) }
                         )
                     }
                 }
                 .padding(.horizontal)
             }
         }
+        .padding(.top)
     }
 
     private func handleSwipeLeft(product: Product) {
@@ -49,6 +51,10 @@ struct GroupedRecommendations: View {
 
     private func handleCreateCollection(product: Product) {
         // Logic for creating a collection with complementary products
+    }
+
+    private func handleSaveForLater(product: Product) {
+        // Logic for saving a product for later
     }
 }
 
