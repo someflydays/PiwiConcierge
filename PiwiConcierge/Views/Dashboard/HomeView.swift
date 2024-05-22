@@ -13,11 +13,11 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Text("Recommended for You")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
+                // Header with personalized greeting
+                ///HeaderView(userName: userData.userName)
+                    ///.padding(.horizontal)
 
+                // Display the RecommendationCarousel
                 RecommendationCarousel()
                     .padding(.horizontal)
 
