@@ -138,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				6532C2882BFC086400DEEA14 /* DashboardView.swift */,
-				65FE1EC82BFD9417006BA50B /* Product.swift */,
 				6532C2852BFC086400DEEA14 /* CartView.swift */,
 				6532C2862BFC086400DEEA14 /* CategoryCard.swift */,
 				6532C2872BFC086400DEEA14 /* CategoryNavigation.swift */,
@@ -172,6 +171,7 @@
 		6532C29B2BFC086400DEEA14 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				65FE1EC82BFD9417006BA50B /* Product.swift */,
 				6532C2982BFC086400DEEA14 /* Constants.swift */,
 				6532C2992BFC086400DEEA14 /* Profile.swift */,
 				6532C29A2BFC086400DEEA14 /* UserData.swift */,

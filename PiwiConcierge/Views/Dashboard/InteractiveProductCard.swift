@@ -75,32 +75,27 @@ struct InteractiveProductCard: View {
                 .offset(x: 100, y: 100) // Adjust position relative to the model
             }
 
-            Text(product.name)
-                .font(.headline)
-                .foregroundColor(.primary)
-                .padding(.top, 5)
-
-            Text("$\(product.price, specifier: "%.2f")")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-
-            HStack {
+            HStack(spacing: 15) {
                 Button(action: onAddToCart) {
-                    Text("Add to Cart")
-                        .font(.headline)
+                    Image(systemName: "cart.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
                         .padding()
                         .background(Color.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(100)
                 }
 
                 Button(action: onCreateCollection) {
-                    Text("Create Collection")
-                        .font(.headline)
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
                         .padding()
                         .background(Color.green)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(100)
                 }
 
                 Button(action: {
@@ -123,14 +118,13 @@ struct InteractiveProductCard: View {
         .background(Color(.systemBackground))
         .cornerRadius(15)
         .shadow(radius: 5)
-        .frame(width: 300, height: 450)
     }
 }
 
 struct InteractiveProductCard_Previews: PreviewProvider {
     static var previews: some View {
         InteractiveProductCard(
-            product: Product(name: "Sample Product", price: 99.99, modelName: "Placeholder-model-0"),
+            product: Product(name: "Sample Product", description: "This is a brief description of the product.", price: 99.99, modelName: "Placeholder-model-0"),
             onSwipeLeft: {},
             onSwipeRight: {},
             onAddToCart: {},

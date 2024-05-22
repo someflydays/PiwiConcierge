@@ -6,51 +6,52 @@
 //
 
 import SwiftUI
-import RealityKit
 
 struct HomeView: View {
     @ObservedObject var userData: UserData
-    @State private var currentProductIndex = 0 // Track the current product index
-    @State private var previousProductIndices: [Int] = [] // Track previously seen product indices
 
     var body: some View {
-        VStack {
-            Spacer()
-            // Header with personalized greeting
-            HeaderView(userName: userData.userName)
-                .padding(.horizontal)
+        VStack(spacing: 20) {
+            if let product = userData.recommendedProducts.first {
+                HStack {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(product.name)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.leading)
 
-            // Display one product at a time
-            if userData.recommendedProducts.indices.contains(currentProductIndex) {
-                InteractiveProductCard(
-                    product: userData.recommendedProducts[currentProductIndex],
-                    onSwipeLeft: handleSwipeLeft,
-                    onSwipeRight: handleSwipeRight,
-                    onAddToCart: handleAddToCart,
-                    onCreateCollection: handleCreateCollection,
-                    onSaveForLater: handleSaveForLater
-                )
-                .padding(.horizontal)
+                        Text(product.description)
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.leading)
+
+                        Text("$\(product.price, specifier: "%.2f")")
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                            .padding(.top, 10)
+
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    InteractiveProductCard(
+                        product: product,
+                        onSwipeLeft: { handleSwipeLeft(product: product) },
+                        onSwipeRight: { handleSwipeRight(product: product) },
+                        onAddToCart: { handleAddToCart(product: product) },
+                        onCreateCollection: { handleCreateCollection(product: product) },
+                        onSaveForLater: { handleSaveForLater(product: product) }
+                    )
+                    .frame(width: 300, height: 450)
+                    .padding(.trailing, 20)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                }
             } else {
                 Text("No more recommendations")
                     .font(.title)
                     .foregroundColor(.secondary)
-            }
-
-            HStack {
-                if !previousProductIndices.isEmpty {
-                    Button(action: handleBack) {
-                        Text("Back")
-                            .font(.headline)
-                            .padding()
-                            .background(Color.gray)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    .padding(.horizontal)
-                }
-
-                Spacer()
+                    .padding()
             }
 
             Spacer()
@@ -58,33 +59,23 @@ struct HomeView: View {
         .padding()
     }
 
-    private func handleSwipeLeft() {
+    private func handleSwipeLeft(product: Product) {
         // Logic for disliking a product
-        previousProductIndices.append(currentProductIndex)
-        currentProductIndex += 1
     }
 
-    private func handleSwipeRight() {
+    private func handleSwipeRight(product: Product) {
         // Logic for liking a product
-        previousProductIndices.append(currentProductIndex)
-        currentProductIndex += 1
     }
 
-    private func handleBack() {
-        if let lastIndex = previousProductIndices.popLast() {
-            currentProductIndex = lastIndex
-        }
-    }
-
-    private func handleAddToCart() {
+    private func handleAddToCart(product: Product) {
         // Logic for adding a product to the cart
     }
 
-    private func handleCreateCollection() {
+    private func handleCreateCollection(product: Product) {
         // Logic for creating a collection with complementary products
     }
 
-    private func handleSaveForLater() {
+    private func handleSaveForLater(product: Product) {
         // Logic for saving a product for later
     }
 }
