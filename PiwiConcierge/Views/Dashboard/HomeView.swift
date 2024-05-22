@@ -12,7 +12,7 @@ struct HomeView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            if let product = userData.recommendedProducts.first {
+            if let product = userData.currentProduct {
                 HStack {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(product.name)
@@ -30,6 +30,44 @@ struct HomeView: View {
                             .foregroundColor(.primary)
                             .padding(.top, 10)
 
+                        HStack(spacing: 15) {
+                            Button(action: { handleAddToCart(product: product) }) {
+                                Image(systemName: "cart.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24, height: 24)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(100)
+                            }
+
+                            Button(action: { handleCreateCollection(product: product) }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24, height: 24)
+                                    .padding()
+                                    .background(Color.green)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(100)
+                            }
+
+                            Button(action: {
+                                handleSaveForLater(product: product)
+                            }) {
+                                Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24, height: 24)
+                                    .padding()
+                                    .background(Color.white)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 5)
+                            }
+                        }
+                        .padding(.top, 10)
+
                         Spacer()
                     }
                     .padding(.leading, 20)
@@ -37,13 +75,13 @@ struct HomeView: View {
 
                     InteractiveProductCard(
                         product: product,
-                        onSwipeLeft: { handleSwipeLeft(product: product) },
-                        onSwipeRight: { handleSwipeRight(product: product) },
+                        onSwipeLeft: { userData.showNextProduct() },
+                        onSwipeRight: { userData.showPreviousProduct() },
                         onAddToCart: { handleAddToCart(product: product) },
                         onCreateCollection: { handleCreateCollection(product: product) },
                         onSaveForLater: { handleSaveForLater(product: product) }
                     )
-                    .frame(width: 300, height: 450)
+                    .frame(maxWidth: .infinity)
                     .padding(.trailing, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
@@ -55,16 +93,33 @@ struct HomeView: View {
             }
 
             Spacer()
+
+            if userData.currentIndex > 0 {
+                HStack {
+                    Button(action: { userData.showPreviousProduct() }) {
+                        Image(systemName: "arrow.left.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .padding()
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                    }
+                    .padding(.leading, 20)
+                    Spacer()
+                }
+            }
         }
         .padding()
     }
 
     private func handleSwipeLeft(product: Product) {
-        // Logic for disliking a product
+        userData.showNextProduct()
     }
 
     private func handleSwipeRight(product: Product) {
-        // Logic for liking a product
+        userData.showPreviousProduct()
     }
 
     private func handleAddToCart(product: Product) {
@@ -76,7 +131,7 @@ struct HomeView: View {
     }
 
     private func handleSaveForLater(product: Product) {
-        // Logic for saving a product for later
+        userData.toggleSave(for: product)
     }
 }
 

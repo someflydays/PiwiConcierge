@@ -12,12 +12,18 @@ struct ProfileView: View {
 
     var body: some View {
         VStack {
-            Text("Profile View for \(userData.userName)")
+            Text("Profile")
                 .font(.largeTitle)
-                .padding()
+                .fontWeight(.bold)
+                .padding(.top)
 
-            // Add more profile-related UI here
+            Text("Welcome back, \(userData.userName)!")
+                .font(.title2)
+                .padding(.top)
+
+            Spacer()
         }
+        .padding()
     }
 }
 

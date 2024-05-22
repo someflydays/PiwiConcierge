@@ -8,9 +8,10 @@
 import Foundation
 
 struct Product: Identifiable {
-    var id = UUID()
-    var name: String
-    var description: String
-    var price: Double
-    var modelName: String
+    let id = UUID()
+    let name: String
+    let description: String
+    let price: Double
+    let modelName: String
+    var isSaved: Bool = false // Add this property
 }

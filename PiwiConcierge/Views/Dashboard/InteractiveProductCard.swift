@@ -17,7 +17,6 @@ struct InteractiveProductCard: View {
     let onCreateCollection: () -> Void
     let onSaveForLater: () -> Void
 
-    @State private var isSaved: Bool = false // Track saved state
     @State private var modelScale: CGFloat = 1.0
     @State private var modelRotation: Angle = .zero
     @State private var isDragging: Bool = false
@@ -74,45 +73,6 @@ struct InteractiveProductCard: View {
                 : nil)
                 .offset(x: 100, y: 100) // Adjust position relative to the model
             }
-
-            HStack(spacing: 15) {
-                Button(action: onAddToCart) {
-                    Image(systemName: "cart.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(100)
-                }
-
-                Button(action: onCreateCollection) {
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(100)
-                }
-
-                Button(action: {
-                    isSaved.toggle()
-                    onSaveForLater()
-                }) {
-                    Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .padding()
-                        .background(Color.white)
-                        .clipShape(Circle())
-                        .shadow(radius: 5)
-                }
-            }
-            .padding(.top, 10)
         }
         .padding()
         .background(Color(.systemBackground))
