@@ -30,27 +30,21 @@ struct HomeView: View {
                             .foregroundColor(.primary)
                             .padding(.top, 10)
 
-                        HStack(spacing: 15) {
+                        HStack(spacing: 30) {
                             Button(action: { handleAddToCart(product: product) }) {
                                 Image(systemName: "cart.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 24, height: 24)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(100)
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.blue)
                             }
 
                             Button(action: { handleCreateCollection(product: product) }) {
                                 Image(systemName: "plus.circle.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 24, height: 24)
-                                    .padding()
-                                    .background(Color.green)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(100)
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.green)
                             }
 
                             Button(action: {
@@ -59,11 +53,8 @@ struct HomeView: View {
                                 Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 24, height: 24)
-                                    .padding()
+                                    .frame(width: 40, height: 40)
                                     .foregroundColor(.white)
-                                    .clipShape(Circle())
-                                    //.shadow(radius: 5)
                             }
                         }
                         .padding(.top, 10)

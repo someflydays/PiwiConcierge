@@ -58,11 +58,11 @@ struct InteractiveProductCard: View {
                     isDragging.toggle()
                 }) {
                     Image(systemName: "cube")
-                        .padding()
-                        //.background(Color.white.opacity(0.7))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
                         .foregroundColor(.white)
                         .clipShape(Circle())
-                        //.shadow(radius: 5)
                 }
                 .gesture(isDragging ? DragGesture()
                     .onChanged { value in
