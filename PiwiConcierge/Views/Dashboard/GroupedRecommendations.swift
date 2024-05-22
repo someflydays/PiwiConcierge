@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import RealityKit
+import RealityKitContent
 
 struct GroupedRecommendations: View {
-    @ObservedObject var userData: UserData
-
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Complete Your Look")
+            Text("Recommended for You")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
@@ -20,46 +20,22 @@ struct GroupedRecommendations: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(userData.recommendedProducts) { product in
+                    ForEach(0..<3) { index in
                         InteractiveProductCard(
-                            product: product,
-                            onSwipeLeft: { handleSwipeLeft(product: product) },
-                            onSwipeRight: { handleSwipeRight(product: product) },
-                            onAddToCart: { handleAddToCart(product: product) },
-                            onCreateCollection: { handleCreateCollection(product: product) },
-                            onSaveForLater: { handleSaveForLater(product: product) }
+                            product: Product(name: "Product \(index + 1)", description: "This is a brief description of Product \(index + 1).", price: 99.99, modelName: "Placeholder-model-\(index)"),
+                            onSwipeLeft: { /* Handle swipe left */ },
+                            onSwipeRight: { /* Handle swipe right */ }
                         )
                     }
                 }
                 .padding(.horizontal)
             }
         }
-        .padding(.top)
-    }
-
-    private func handleSwipeLeft(product: Product) {
-        // Logic for disliking a product
-    }
-
-    private func handleSwipeRight(product: Product) {
-        // Logic for liking a product
-    }
-
-    private func handleAddToCart(product: Product) {
-        // Logic for adding a product to the cart
-    }
-
-    private func handleCreateCollection(product: Product) {
-        // Logic for creating a collection with complementary products
-    }
-
-    private func handleSaveForLater(product: Product) {
-        // Logic for saving a product for later
     }
 }
 
 struct GroupedRecommendations_Previews: PreviewProvider {
     static var previews: some View {
-        GroupedRecommendations(userData: UserData())
+        GroupedRecommendations()
     }
 }
