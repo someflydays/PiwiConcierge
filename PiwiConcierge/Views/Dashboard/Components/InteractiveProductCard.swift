@@ -17,9 +17,11 @@ struct InteractiveProductCard: View {
     @State private var modelPosition: CGSize = .zero
     @State private var rotationVelocity: CGFloat = 0.0
     @State private var lastDragValue: DragGesture.Value?
+    @State private var isPinching: Bool = false
 
     private let maxRotationSpeed: CGFloat = 5.0 // Maximum rotation speed in degrees per update
-    private let decelerationRate: CGFloat = 0.98 // Deceleration rate for inertia effect
+    private let decelerationRate: CGFloat = 0.99 // Deceleration rate for inertia effect
+    private let velocityThreshold: CGFloat = 0.1 // Threshold to apply inertia
 
     var body: some View {
         Model3D(named: product.modelName, bundle: realityKitContentBundle)
@@ -38,19 +40,25 @@ struct InteractiveProductCard: View {
                             rotationVelocity = min(max(rotationVelocity, -maxRotationSpeed), maxRotationSpeed)
                         }
                         lastDragValue = value
-                        
+
                         let rotationAngleY = Angle(degrees: Double(rotationVelocity))
                         modelRotationY += rotationAngleY
                     }
                     .onEnded { _ in
-                        applyInertia()
+                        if abs(rotationVelocity) > velocityThreshold {
+                            applyInertia()
+                        }
                         lastDragValue = nil
                     }
             )
             .simultaneousGesture(
                 MagnificationGesture()
                     .onChanged { value in
+                        isPinching = true
                         modelScale = value
+                    }
+                    .onEnded { _ in
+                        isPinching = false
                     }
             )
             .simultaneousGesture(
@@ -78,14 +86,14 @@ struct InteractiveProductCard: View {
     }
 
     private func applyInertia() {
-        // Apply inertia effect with deceleration
         Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
             rotationVelocity *= decelerationRate
             let rotationAngleY = Angle(degrees: Double(rotationVelocity))
             modelRotationY += rotationAngleY
-            
-            if abs(rotationVelocity) < 0.1 {
+
+            if abs(rotationVelocity) < velocityThreshold {
                 timer.invalidate()
+                rotationVelocity = 0.0
             }
         }
     }
