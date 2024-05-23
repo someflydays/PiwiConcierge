@@ -100,7 +100,6 @@ struct HomeView: View {
                                     .frame(width: 35, height: 35)
                                     .padding()
                                     .foregroundColor(.white)
-                                    .clipShape(Circle())
                                     .background(Color.gray.opacity(0.5))
                                     .clipShape(Circle())
                             }
@@ -121,9 +120,6 @@ struct HomeView: View {
                                 .frame(width: 40, height: 40)
                                 .padding()
                                 .foregroundColor(.white)
-                                .clipShape(Circle())
-                                .background(Color.gray.opacity(0.5))
-                                .clipShape(Circle())
                         }
                         .gesture(isDragging ? DragGesture()
                             .onChanged { value in

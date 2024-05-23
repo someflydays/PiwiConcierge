@@ -10,17 +10,40 @@ When I open Amazon, I can see products right away. I can start searching, shoppi
 
 The RecSys should be providing product recommendations as soon as the window is opened. The user does not need to enter the immersive space to gain value from the app. The RecSys provides massive value. This is a whole app idea on its own, and should be compatible with iOS and iPadOS (as well as via a browser).
 
-There should be a call to action that lets the user enter the immersive space. Keep in mind, I can stil display 3D digital twins in a window, before the user enters the immersive space.These may be incorporated into the iOS, iPadOS, and browser versions of the app. But there needs to be a button that the user clicks to enter the fully immersive experience.
+There should be a call to action that lets the user enter the immersive space. Keep in mind, I can still display 3D digital twins in a window, before the user enters the immersive space. These may be incorporated into the iOS, iPadOS, and browser versions of the app. But there needs to be a button that the user clicks to enter the fully immersive experience.
 
-Could I potentially opt for just using the digital crown to ease into an immersive state? Or, should there be a button? If anything, at the very least, there needs to be a message that tells the user about this option.
+Could I potentially opt for just using the digital crown to ease into an immersive space? Or, should there be a button? If anything, at the very least, there needs to be a message that tells the user about this option.
 
 
 VIEWS:
 
 Introduction (Welcome) - for first time users, and upon updates
 
-Main UI - A window that displays recommendations represented as 3D volumes (digital twins)
+Dashboard - A window that displays recommendations represented as 3D volumes (digital twins)
 
 AR Immersive Space - AR storefronts, volumes (products) displayed in the user's immediate surroundings
 
 VR Immersive Space - VR storefronts, completely unbelievable shopping experiences (Swiss Alps)
+
+
+
+
+
+
+
+
+Update:
+
+Most recent commit: 1d5330dc2e94e3d43ee765041e79d5b086f9cc3a
+
+Right now, the 3D assets appear dark in the Simulator but normal in the Preview.
+
+I wanted to implement a swipe right / swipe left feature where the user waves with an open hand to move to the next product while indicating that they like or don't like the product (which will help train the RecSys). There should also be a cool hidden gesture that adds a product to cart (👉).
+
+However, I want to make sure that the swipe gestures don't interfere with purchasing decisions. For example, if it is more comfortable to swipe left than to swipe right, the user may be inclined to swipe left more. And, similar to endless scrolling, the user may be in a trance of swiping through products and it could take a lot of effort to get them to decide to stop and add the item to cart (or even interact with the item at all).
+
+Also, I think we might need a more intuitive gesture for dragging / repositioning the asset. How about this?: Pinch with one hand to reposition -- not to rotate. Swipe with an open hand to rotate - not to move to the next product. Pinch with two hands to zoom. If I implement it this way, then it becomes slightly more difficult for users to get in an endless swiping loop -- because they will have to look at the next button and click it specifically, rather than just easily swiping. Plus, this frees up the cube button to serve as an immersive-space button. 
+
+But how do I let users easily provide feedback to train the RecSys? (Since it's no longer done with swiping). I guess there are enough opportunities for feedback (add to cart, save, leave product, etc). Plus, the user should be able to give feedback vocally in natural language, which will be interpreted and turned into training data. But I don't think the user should be able to say "No. No. No. No. ..." as they swipe through products. That would make bystanders dislike the app and the concept of 3D shopping as a whole. In fact, the natural language interface should be COMPLETELY optional so that people can shop silently.
+
+Actually, the endless scroll addictiveness could be a huge value proposition. Because think abut it -- we're showing one recommended product at a time. Like a TikTok. It's basically a For You page and you never know what's going to pop up next. That's addicting and exciting. But how do I get users to interact with (and buy) the product rather than ONLY scrolling? I guess the answer is to make the RecSys amazing so that it provides a ton of value in its recommendations. Give users things they want, love, and need EVERY time. That's how to get them to stay on the app AND buy.
