@@ -15,6 +15,8 @@ struct InteractiveProductCard: View {
     @State private var modelScale: CGFloat = 1.0
     @State private var modelRotationY: Angle = .zero
     @State private var modelPosition: CGSize = .zero
+    @State private var rotationVelocity: Double = 0.0
+    @State private var lastRotationTime: Date?
 
     var body: some View {
         Model3D(named: product.modelName, bundle: realityKitContentBundle)
@@ -26,8 +28,18 @@ struct InteractiveProductCard: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
+                        let currentTime = Date()
+                        if let lastTime = lastRotationTime {
+                            let timeInterval = currentTime.timeIntervalSince(lastTime)
+                            rotationVelocity = Double(value.translation.width) / timeInterval
+                        }
+                        lastRotationTime = currentTime
+                        
                         let rotationAngleY = Angle(degrees: value.translation.width / 10)
                         modelRotationY += rotationAngleY
+                    }
+                    .onEnded { _ in
+                        applyInertia()
                     }
             )
             .simultaneousGesture(
@@ -58,6 +70,14 @@ struct InteractiveProductCard: View {
                         playProductAnimation(for: product)
                     }
             )
+    }
+
+    private func applyInertia() {
+        withAnimation(.easeOut(duration: 2.0)) {
+            modelRotationY += Angle(degrees: rotationVelocity / 10)
+        }
+        rotationVelocity = 0.0
+        lastRotationTime = nil
     }
 
     private func playProductAnimation(for product: Product) {
