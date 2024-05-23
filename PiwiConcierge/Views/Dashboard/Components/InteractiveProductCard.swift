@@ -15,8 +15,11 @@ struct InteractiveProductCard: View {
     @State private var modelScale: CGFloat = 1.0
     @State private var modelRotationY: Angle = .zero
     @State private var modelPosition: CGSize = .zero
-    @State private var rotationVelocity: Double = 0.0
-    @State private var lastRotationTime: Date?
+    @State private var rotationVelocity: CGFloat = 0.0
+    @State private var lastDragValue: DragGesture.Value?
+
+    private let maxRotationSpeed: CGFloat = 5.0 // Maximum rotation speed in degrees per update
+    private let decelerationRate: CGFloat = 0.98 // Deceleration rate for inertia effect
 
     var body: some View {
         Model3D(named: product.modelName, bundle: realityKitContentBundle)
@@ -28,18 +31,20 @@ struct InteractiveProductCard: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        let currentTime = Date()
-                        if let lastTime = lastRotationTime {
-                            let timeInterval = currentTime.timeIntervalSince(lastTime)
-                            rotationVelocity = Double(value.translation.width) / timeInterval
+                        if let lastValue = lastDragValue {
+                            let translation = value.translation.width - lastValue.translation.width
+                            rotationVelocity = translation / 10
+                            // Clamp the rotation velocity to the maximum speed
+                            rotationVelocity = min(max(rotationVelocity, -maxRotationSpeed), maxRotationSpeed)
                         }
-                        lastRotationTime = currentTime
+                        lastDragValue = value
                         
-                        let rotationAngleY = Angle(degrees: value.translation.width / 10)
+                        let rotationAngleY = Angle(degrees: Double(rotationVelocity))
                         modelRotationY += rotationAngleY
                     }
                     .onEnded { _ in
                         applyInertia()
+                        lastDragValue = nil
                     }
             )
             .simultaneousGesture(
@@ -73,11 +78,16 @@ struct InteractiveProductCard: View {
     }
 
     private func applyInertia() {
-        withAnimation(.easeOut(duration: 2.0)) {
-            modelRotationY += Angle(degrees: rotationVelocity / 10)
+        // Apply inertia effect with deceleration
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+            rotationVelocity *= decelerationRate
+            let rotationAngleY = Angle(degrees: Double(rotationVelocity))
+            modelRotationY += rotationAngleY
+            
+            if abs(rotationVelocity) < 0.1 {
+                timer.invalidate()
+            }
         }
-        rotationVelocity = 0.0
-        lastRotationTime = nil
     }
 
     private func playProductAnimation(for product: Product) {
