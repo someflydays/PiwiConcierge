@@ -20,7 +20,7 @@ struct InteractiveProductCard: View {
     @State private var isPinching: Bool = false
 
     private let maxRotationSpeed: CGFloat = 5.0 // Maximum rotation speed in degrees per update
-    private let decelerationRate: CGFloat = 0.99 // Deceleration rate for inertia effect
+    private let decelerationRate: CGFloat = 0.98 // Deceleration rate for inertia effect
     private let velocityThreshold: CGFloat = 0.1 // Threshold to apply inertia
 
     var body: some View {
