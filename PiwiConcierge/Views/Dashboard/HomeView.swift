@@ -40,6 +40,7 @@ struct HomeView: View {
                                         .frame(width: 40, height: 40)
                                         .foregroundColor(.blue)
                                 }
+                                .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
 
                                 Button(action: { handleCreateCollection(product: product) }) {
                                     Image(systemName: "plus.circle.fill")
@@ -48,6 +49,7 @@ struct HomeView: View {
                                         .frame(width: 40, height: 40)
                                         .foregroundColor(.green)
                                 }
+                                .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
 
                                 Button(action: {
                                     handleSaveForLater(product: product)
@@ -58,6 +60,7 @@ struct HomeView: View {
                                         .frame(width: 40, height: 40)
                                         .foregroundColor(.white)
                                 }
+                                .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
                             }
                             .padding(.top, 10)
 
@@ -72,7 +75,8 @@ struct HomeView: View {
                             onSwipeRight: { handleSwipeRight(product: product) }
                         )
                         .frame(maxWidth: .infinity)
-                        .padding(.trailing, 20)
+                        //.padding(.trailing, 20)
+                        .padding()
                         .frame(maxWidth: .infinity, alignment: .center)
                         .transition(.opacity.animation(.easeInOut(duration: 1.0))) // Slower fade transition
                     }
@@ -85,50 +89,56 @@ struct HomeView: View {
 
                 Spacer()
 
-                if userData.currentIndex > 0 {
+                HStack {
+                    // The Back Button only appears at the second recommendation, and beyond
+                    if userData.currentIndex > 0 {
+                        HStack {
+                            Button(action: { userData.showPreviousProduct() }) {
+                                Image(systemName: "chevron.left")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 35, height: 35)
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .clipShape(Circle())
+                                    .background(Color.gray.opacity(0.5))
+                                    .clipShape(Circle())
+                            }
+                            .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
+                            .padding(.leading, 20)
+                            Spacer()
+                        }
+                    }
+                    Spacer()
                     HStack {
-                        Button(action: { userData.showPreviousProduct() }) {
-                            Image(systemName: "chevron.left")
+                        Spacer()
+                        Button(action: {
+                            isDragging.toggle()
+                        }) {
+                            Image(systemName: "cube")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 40)
                                 .padding()
                                 .foregroundColor(.white)
                                 .clipShape(Circle())
-                                .shadow(radius: 5)
+                                .background(Color.gray.opacity(0.5))
+                                .clipShape(Circle())
                         }
-                        .padding(.leading, 20)
-                        Spacer()
+                        .gesture(isDragging ? DragGesture()
+                            .onChanged { value in
+                                // Update model position based on drag
+                            }
+                            .onEnded { _ in
+                                isDragging = false
+                            }
+                                 : nil)
+                        .padding()
+                        .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
                     }
                 }
             }
             .padding()
-
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        isDragging.toggle()
-                    }) {
-                        Image(systemName: "cube")
-                            .padding()
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                            .background(Color.gray.opacity(0.5))
-                            .clipShape(Circle())
-                    }
-                    .gesture(isDragging ? DragGesture()
-                        .onChanged { value in
-                            // Update model position based on drag
-                        }
-                        .onEnded { _ in
-                            isDragging = false
-                        }
-                    : nil)
-                    .padding()
-                }
-            }
         }
     }
 
