@@ -11,50 +11,67 @@ import RealityKitContent
 
 struct InteractiveProductCard: View {
     let product: Product
-    let onSwipeLeft: () -> Void
-    let onSwipeRight: () -> Void
 
     @State private var modelScale: CGFloat = 1.0
-    @State private var modelRotation: Angle = .zero
+    @State private var modelRotationY: Angle = .zero
+    @State private var modelPosition: CGSize = .zero
 
     var body: some View {
         Model3D(named: product.modelName, bundle: realityKitContentBundle)
             .frame(height: 300 * modelScale) // Adjust height based on scale
-            .rotationEffect(modelRotation) // Apply rotation
+            .rotation3DEffect(modelRotationY, axis: (x: 0, y: 1, z: 0)) // Apply y-axis rotation
+            .offset(x: modelPosition.width, y: modelPosition.height) // Apply position offset
             .cornerRadius(15)
             .shadow(radius: 5)
-            .gesture(DragGesture()
-                .onEnded { value in
-                    if value.translation.width < -100 {
-                        withAnimation {
-                            onSwipeLeft()
-                        }
-                    } else if value.translation.width > 100 {
-                        withAnimation {
-                            onSwipeRight()
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        let rotationAngleY = Angle(degrees: value.translation.width / 10)
+                        modelRotationY += rotationAngleY
+                    }
+            )
+            .simultaneousGesture(
+                MagnificationGesture()
+                    .onChanged { value in
+                        modelScale = value
+                    }
+            )
+            .simultaneousGesture(
+                LongPressGesture(minimumDuration: 1.0)
+                    .sequenced(before: DragGesture())
+                    .onChanged { value in
+                        switch value {
+                        case .second(true, let drag?):
+                            modelPosition = CGSize(
+                                width: modelPosition.width + drag.translation.width,
+                                height: modelPosition.height + drag.translation.height
+                            )
+                        default:
+                            break
                         }
                     }
-                }
             )
-            .gesture(MagnificationGesture()
-                .onChanged { value in
-                    modelScale = value
-                }
+            .gesture(
+                TapGesture()
+                    .onEnded {
+                        // Trigger animation for the product
+                        playProductAnimation(for: product)
+                    }
             )
-            .gesture(RotationGesture()
-                .onChanged { value in
-                    modelRotation = value
-                }
-            )
+    }
+
+    private func playProductAnimation(for product: Product) {
+        // Implement the animation logic here
+        // Example: Trigger an animation like propeller spin for a model airplane
+        // This is just a placeholder for the actual animation implementation
+        print("Playing animation for \(product.name)")
     }
 }
 
 struct InteractiveProductCard_Previews: PreviewProvider {
     static var previews: some View {
         InteractiveProductCard(
-            product: Product(name: "Sample Product", description: "This is a brief description of the product.", price: 99.99, modelName: "Placeholder-model-0"),
-            onSwipeLeft: {},
-            onSwipeRight: {}
+            product: Product(name: "Sample Product", description: "This is a brief description of the product.", price: 99.99, modelName: "Placeholder-model-0")
         )
     }
 }

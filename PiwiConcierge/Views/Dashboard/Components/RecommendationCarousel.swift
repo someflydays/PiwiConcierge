@@ -22,9 +22,7 @@ struct RecommendationCarousel: View {
                 HStack(spacing: 15) {
                     ForEach(0..<3) { index in
                         InteractiveProductCard(
-                            product: Product(name: "Product \(index + 1)", description: "This is a brief description of Product \(index + 1).", price: 99.99, modelName: "Placeholder-model-\(index)"),
-                            onSwipeLeft: { /* Handle swipe left */ },
-                            onSwipeRight: { /* Handle swipe right */ }
+                            product: Product(name: "Product \(index + 1)", description: "This is a brief description of Product \(index + 1).", price: 99.99, modelName: "Placeholder-model-\(index)")
                         )
                     }
                 }

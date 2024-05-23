@@ -69,16 +69,12 @@ struct HomeView: View {
                         .padding(.leading, 20)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                        InteractiveProductCard(
-                            product: product,
-                            onSwipeLeft: { handleSwipeLeft(product: product) },
-                            onSwipeRight: { handleSwipeRight(product: product) }
-                        )
-                        .frame(maxWidth: .infinity)
-                        //.padding(.trailing, 20)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .transition(.opacity.animation(.easeInOut(duration: 1.0))) // Slower fade transition
+                        InteractiveProductCard(product: product)
+                            .frame(maxWidth: .infinity)
+                            //.padding(.trailing, 20)
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .transition(.opacity.animation(.easeInOut(duration: 1.0))) // Slower fade transition
                     }
                 } else {
                     Text("No more recommendations")
@@ -135,18 +131,6 @@ struct HomeView: View {
                 }
             }
             .padding()
-        }
-    }
-
-    private func handleSwipeLeft(product: Product) {
-        withAnimation {
-            userData.showNextProduct()
-        }
-    }
-
-    private func handleSwipeRight(product: Product) {
-        withAnimation {
-            userData.showPreviousProduct()
         }
     }
 
