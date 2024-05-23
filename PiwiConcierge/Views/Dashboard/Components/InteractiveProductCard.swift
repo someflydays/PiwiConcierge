@@ -14,10 +14,8 @@ struct InteractiveProductCard: View {
 
     @State private var modelScale: CGFloat = 1.0
     @State private var modelRotationY: Angle = .zero
-    @State private var modelPosition: CGSize = .zero
     @State private var rotationVelocity: CGFloat = 0.0
     @State private var lastDragValue: DragGesture.Value?
-    @State private var isPinching: Bool = false
     @State private var isAnimating: Bool = false
 
     private let maxRotationSpeed: CGFloat = 5.0 // Maximum rotation speed in degrees per update
@@ -28,7 +26,6 @@ struct InteractiveProductCard: View {
         Model3D(named: product.modelName, bundle: realityKitContentBundle)
             .frame(height: 300 * modelScale) // Adjust height based on scale
             .rotation3DEffect(modelRotationY, axis: (x: 0, y: 1, z: 0)) // Apply y-axis rotation
-            .offset(x: modelPosition.width, y: modelPosition.height) // Apply position offset
             .cornerRadius(15)
             .shadow(radius: 5)
             .gesture(
@@ -55,31 +52,12 @@ struct InteractiveProductCard: View {
             .simultaneousGesture(
                 MagnificationGesture()
                     .onChanged { value in
-                        isPinching = true
                         modelScale = value
-                    }
-                    .onEnded { _ in
-                        isPinching = false
-                    }
-            )
-            .simultaneousGesture(
-                LongPressGesture(minimumDuration: 1.0)
-                    .sequenced(before: DragGesture())
-                    .onChanged { value in
-                        switch value {
-                        case .second(true, let drag?):
-                            modelPosition = CGSize(
-                                width: modelPosition.width + drag.translation.width,
-                                height: modelPosition.height + drag.translation.height
-                            )
-                        default:
-                            break
-                        }
                     }
             )
             .gesture(
                 TapGesture()
-                    .onEnded { _ in
+                    .onEnded {
                         playProductAnimation(for: product)
                     }
             )
@@ -101,12 +79,8 @@ struct InteractiveProductCard: View {
     }
 
     private func playProductAnimation(for product: Product) {
-        // Implement the animation logic here
-        // Example: Trigger an animation like propeller spin for a model airplane
-        // This is just a placeholder for the actual animation implementation
         print("Playing animation for \(product.name)")
 
-        // Example animation: scale up and then scale back down
         withAnimation {
             isAnimating.toggle()
         }
