@@ -18,6 +18,7 @@ struct InteractiveProductCard: View {
     @State private var rotationVelocity: CGFloat = 0.0
     @State private var lastDragValue: DragGesture.Value?
     @State private var isPinching: Bool = false
+    @State private var isAnimating: Bool = false
 
     private let maxRotationSpeed: CGFloat = 5.0 // Maximum rotation speed in degrees per update
     private let decelerationRate: CGFloat = 0.98 // Deceleration rate for inertia effect
@@ -78,11 +79,12 @@ struct InteractiveProductCard: View {
             )
             .gesture(
                 TapGesture()
-                    .onEnded {
-                        // Trigger animation for the product
+                    .onEnded { _ in
                         playProductAnimation(for: product)
                     }
             )
+            .scaleEffect(isAnimating ? 1.2 : 1.0)
+            .animation(.easeInOut(duration: 0.5), value: isAnimating)
     }
 
     private func applyInertia() {
@@ -103,6 +105,16 @@ struct InteractiveProductCard: View {
         // Example: Trigger an animation like propeller spin for a model airplane
         // This is just a placeholder for the actual animation implementation
         print("Playing animation for \(product.name)")
+
+        // Example animation: scale up and then scale back down
+        withAnimation {
+            isAnimating.toggle()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+                isAnimating.toggle()
+            }
+        }
     }
 }
 
