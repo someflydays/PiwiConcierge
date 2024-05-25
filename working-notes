@@ -52,3 +52,18 @@ I guess there are enough opportunities for the RecSys to gather feedback from th
 
 
 There should also be a cool hand gesture that adds a product to cart (for example, pointing at it like: 👉).
+
+
+
+
+UI TODO:
+
+- Move object a bit more into the center of the window
+- Implement "next product" navigation gesture (double-tap? Triple-tap?)
+- Add a "Forward" button that appears when the user goes back to a previous object. This is different than the triple-tap, which recommends a new product. (Does this make sense?)
+- Implement functionality of cube button
+- Change Add To Cart button icon
+- Resize buttons, and add a Share button (and a Buy Now button (???) )
+- Improve formatting and location of product info (text)
+- Improve transition animation from one object to the next.
+- When navigating to an object, it should be spawned with its default rotated orientation (not in the same rotated orientation as the previous object).
