@@ -108,7 +108,6 @@ struct HomeView: View {
                     .padding(.top, 60)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition
-                    
                 }
             } else {
                 Text("No more recommendations")
