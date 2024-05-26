@@ -67,3 +67,14 @@ UI TODO:
 - Improve formatting and location of product info (text)
 - Improve transition animation from one object to the next.
 - When navigating to an object, it should be spawned with its default rotated orientation (not in the same rotated orientation as the previous object).
+- Implement a maximum 3D model size (for very large objects)
+- Implement a minimum window size, so it can't be shrunken too much
+- When the Cube button is selected, figure out how to make it easy t add to cart. (Float an add to cart button along with the object?)
+- Remove circle behind back button?
+- Make back button a bit smaller, OR make the side tab buttons a bit bigger
+- Make the AppIcon layers appear in 3D when selected from Vision Pro Home Screen
+- When cart is empty, Cart Tab icon should be empty cart (􀍩) else, 􀍪
+- Animate "Add to Cart" button when looked at and, separately, when clicked
+- Make buttons peel off the window when looked at
+- One of the pieces of user data should be body dimensions (gathered by looking in the mirror)
+- It's hard to rotate the object if the window is up close
