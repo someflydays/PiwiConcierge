@@ -13,6 +13,35 @@ struct HomeView: View {
 
     var body: some View {
         VStack(spacing: 20) {
+            
+            /*
+            Button(action: { userData.showNextProduct() }) {
+                ZStack {
+                    Image("icon-background")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 60, height: 60)
+                    
+                    LottieView(filename: "shopping-cart-animation")
+                        .frame(height: 60)
+                }
+            }
+            .padding(.top, 20) // This pads the Button to the top
+            .buttonStyle(PlainButtonStyle())
+             */
+            
+            /*
+            Button(action: {}) {
+                Image(systemName: "magnifyingglass")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.white)
+            }
+            .padding(.top, 10)
+            //.buttonStyle(PlainButtonStyle())
+            */
+            
             if let product = userData.currentProduct {
                 HStack {
                     VStack(alignment: .leading, spacing: 10) {
@@ -78,7 +107,7 @@ struct HomeView: View {
                     .padding(.trailing, 250)
                     .padding(.top, 60)
                     .frame(maxWidth: .infinity, alignment: .center)
-                    .transition(.opacity.animation(.easeInOut(duration: 1.0))) // Slower fade transition
+                    .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition
                     
                 }
             } else {
