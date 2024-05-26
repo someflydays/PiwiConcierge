@@ -61,38 +61,68 @@ struct HomeView: View {
                             .font(.title2)
                             .foregroundColor(.primary)
                             .padding(.top, 10)
-
-                        HStack(spacing: 30) {
-                            Button(action: { handleAddToCart(product: product) }) {
-                                Image(systemName: "cart.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(.blue)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-
-                            Button(action: { handleCreateCollection(product: product) }) {
-                                Image(systemName: "plus.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(.green)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-
-                            Button(action: {
-                                handleSaveForLater(product: product)
-                            }) {
-                                Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(.white)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+                        
+                        Button(action: {
+                            handleSaveForLater(product: product)
+                        }) {
+                            Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
                         }
-                        .padding(.top, 20) // This pads the row of buttons to the top
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 20)
+                        
+                        Spacer()
+                        
+                        /*
+                        Button(action: { handleAddToCart(product: product) }) {
+                            Image(systemName: "cart.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.blue)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        */
+                        
+                        Button(action: { handleAddToCart(product: product) }) {
+                            Text("Add to Cart")
+                                .padding()
+                                .frame(maxWidth: 150)
+                                .foregroundColor(.white)
+                        }
+                        .background(
+                            Color.blue
+                        )
+                        .cornerRadius(100)
+                        .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
+                        //.padding(.top, 20)
+
+                        /*
+                        Button(action: { handleCreateCollection(product: product) }) {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.green)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        */
+                        
+                        Button(action: { handleCreateCollection(product: product) }) {
+                            Text("New Group")
+                                .padding()
+                                .frame(maxWidth: 150)
+                                .foregroundColor(.white)
+                        }
+                        .background(
+                            Color.green
+                        )
+                        .cornerRadius(100)
+                        .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
+                        .padding(.top, 10)
 
                         Spacer()
                     }
@@ -132,7 +162,7 @@ struct HomeView: View {
                             //.clipShape(Circle())
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .padding(.leading, 20) // This pads the Back button to the left
+                    .padding(.leading, 5) // This pads the Back button to the left
                 }
                 Spacer() // This spacer places the Cube button to the right (instead of the center)
                 Button(action: {
