@@ -13,5 +13,5 @@ struct Product: Identifiable {
     let description: String
     let price: Double
     let modelName: String
-    var isSaved: Bool = false // Add this property
+    var isSaved: Bool = false
 }

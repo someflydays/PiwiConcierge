@@ -19,7 +19,7 @@ struct DashboardView: View {
             
             CartView()
                 .tabItem {
-                    Label("Cart", systemImage: "cart.fill") // alternate the symbol based on if cart is empty or full
+                    Label("Cart", systemImage: "cart.fill") // alternate the symbol based on if cart is empty or not
                 }
             
             SavedView()
