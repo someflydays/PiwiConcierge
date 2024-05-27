@@ -59,25 +59,24 @@ There should also be a cool hand gesture that adds a product to cart (for exampl
 UI TODO:
 
 - Move object a bit more into the center of the window ✅
-- Implement "next product" navigation gesture (double-tap? Triple-tap?)
-- Add a "Forward" button that appears when the user goes back to a previous object. This is different than the triple-tap, which recommends a new product. (Does this make sense?)
-- Implement functionality of cube button
-- Change Add To Cart button icon
-- Resize buttons, and add a Share button (and a Buy Now button (???) )
+- Fix "next product" navigation gesture (double-tap? Triple-tap?)
+- Add a "Forward" button that appears when the user goes back to a previous object. This is different than the triple-tap, which recommends a new product.
+- Implement the functionality of the Cube button
+- Change Add To Cart button icon ✅
+- Add a Share button which allows the user to send the product to a friend
 - Improve formatting and location of product info (text)
-- Improve transition animation from one object to the next. 🟡
-- When navigating to an object, it should be spawned with its default rotated orientation (not in the same rotated orientation as the previous object).
+- Improve transition animation from one object to the next. ✅
+- When navigating to an object, it should be spawned with its default non-rotated orientation (not in the same rotated orientation as the previous object).
 - Implement a maximum 3D model size (for very large objects)
 - Implement a minimum window size, so it can't be shrunken too much
-- When the Cube button is selected, figure out how to make it easy to add to cart. (Float an add to cart button along with the object?). Also figure out how to disable the cube-mode 
-- Remove circle behind back button? ✅
-- Make back button a bit smaller, OR make the side tab buttons a bit bigger
+- When the Cube button is selected, and the window disappears, figure out how to make it easy to add to cart. (Float an add to cart button along with the object?). Also figure out how to disable the cube-mode.
+- Remove circle behind back button ✅
+- Make back button a bit smaller, OR make the side tab buttons a bit bigger ✅
 - Make the AppIcon layers appear in 3D when selected from Vision Pro Home Screen
 - When cart is empty, Cart Tab icon should be empty cart (􀍩) else, 􀍪
-- Animate "Add to Cart" button when looked at and, separately, when clicked
+- Change "Add to Cart" button color when clicked
 - Make buttons peel off the window when looked at (?)
-- One of the pieces of user data should be body dimensions (gathered by looking in the mirror)
-- It's hard to rotate the object if the window is up close
+- Right now, it's hard to rotate the object if the window is up close
 - IDEA: Piwi Concierge logo-looking search button in the top right corner of the window. If tapped, it goes to the next product. If held, it listens to user feedback- and then goes to the next product.
 - IDEA: Implement an 'actual size' button that makes the model life-size (?)
-- Add a "Saved" text (next to the button) that fades in and back out when the user saves a product
+- Add a "Saved" text (next to the Save button) that fades in and back out when the user saves a product
