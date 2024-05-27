@@ -12,8 +12,7 @@ struct HomeView: View {
     @State private var isDragging: Bool = false
 
     var body: some View {
-        VStack(spacing: 20) {
-            
+        VStack(spacing: 20) {            
             /*
             Button(action: { userData.showNextProduct() }) {
                 ZStack {

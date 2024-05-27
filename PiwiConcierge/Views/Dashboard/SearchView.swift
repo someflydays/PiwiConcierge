@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct SearchView: View {
+    @State private var searchText: String = ""
+    
     var body: some View {
-        Text("Search View")
+        SearchBar(text: $searchText)
+            .frame(width: 500) // Adjust width of Search Bar
+            .padding(.horizontal)
+            .cornerRadius(20)
+            .shadow(radius: 5)
     }
 }
 

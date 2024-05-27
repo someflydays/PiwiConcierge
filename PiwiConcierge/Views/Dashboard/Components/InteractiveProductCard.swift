@@ -12,7 +12,7 @@ import RealityKitContent
 struct InteractiveProductCard: View {
     let product: Product
 
-    @State private var modelScale: CGFloat = 1.0
+    @State private var modelScale: CGFloat = 1.2 // Increased the initial scale (from 1.0 to 1.2)
     @State private var modelRotationY: Angle = .zero
     @State private var rotationVelocity: CGFloat = 0.0
     @State private var lastDragValue: DragGesture.Value?
@@ -24,7 +24,8 @@ struct InteractiveProductCard: View {
 
     var body: some View {
         Model3D(named: product.modelName, bundle: realityKitContentBundle)
-            .frame(height: 300 * modelScale) // Adjust height based on scale
+            //.frame(height: 350 * modelScale) // Adjusted height (from 300 to 350) based on increased scale
+            .frame(maxHeight: .infinity) // Ensure the model view takes up available space
             .rotation3DEffect(modelRotationY, axis: (x: 0, y: 1, z: 0)) // Apply y-axis rotation
             .cornerRadius(15)
             .shadow(radius: 5)
