@@ -80,3 +80,4 @@ UI TODO:
 - IDEA: Piwi Concierge logo-looking search button in the top right corner of the window. If tapped, it goes to the next product. If held, it listens to user feedback- and then goes to the next product.
 - IDEA: Implement an 'actual size' button that makes the model life-size (?)
 - Add a "Saved" text (next to the Save button) that fades in and back out when the user saves a product
+- Leftmost HStack gets crushed when window is resized

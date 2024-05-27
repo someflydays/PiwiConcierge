@@ -61,17 +61,31 @@ struct HomeView: View {
                             .foregroundColor(.primary)
                             .padding(.top, 10)
                         
-                        Button(action: {
-                            handleSaveForLater(product: product)
-                        }) {
-                            Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(.white)
+                        HStack {
+                            // Save button
+                            Button(action: {
+                                handleSaveForLater(product: product)
+                            }) {
+                                Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.white)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .padding(.top, 20)
+                            
+                            // Share button
+                            Button(action: {}) {
+                                Image(systemName: "square.and.arrow.up")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.white)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .padding(.top, 20)
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.top, 20)
                         
                         Spacer()
                         
