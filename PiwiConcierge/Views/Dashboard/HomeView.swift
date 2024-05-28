@@ -60,32 +60,19 @@ struct HomeView: View {
                             .font(.title2)
                             .foregroundColor(.primary)
                             .padding(.top, 10)
-                        
-                        HStack {
-                            // Save button
-                            Button(action: {
-                                handleSaveForLater(product: product)
-                            }) {
-                                Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(.white)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .padding(.top, 20)
-                            
-                            // Share button
-                            Button(action: {}) {
-                                Image(systemName: "square.and.arrow.up")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(.white)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .padding(.top, 20)
+
+                        // Save button
+                        Button(action: {
+                            handleSaveForLater(product: product)
+                        }) {
+                            Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
                         }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 20)
                         
                         Spacer()
                         
@@ -152,8 +139,35 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition
                     
-                    
-                    // Put a VStack with the Share button and Cube button here
+    
+                    VStack {
+                        // Share button
+                        Button(action: {}) {
+                            Image(systemName: "square.and.arrow.up")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 20)
+                        
+                        Spacer()
+                        
+                        // Cube button
+                        Button(action: {
+                            isDragging.toggle()
+                        }) {
+                            Image(systemName: "cube")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                                .padding()
+                                .foregroundColor(.white)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.trailing, 20) // This pads the Cube button to the right
+                    }
                     
                     
                 }
@@ -166,35 +180,20 @@ struct HomeView: View {
 
             //Spacer() // This adds a bit of space between the upper HStack and the lower HStack
 
-            HStack {
-                // The Back Button only appears at the second recommendation, and beyond
-                if userData.currentIndex > 0 {
-                    Button(action: { userData.showPreviousProduct() }) {
-                        Image(systemName: "chevron.left")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 35, height: 35)
-                            .padding() // For some reason, this makes the circle around the button bigger
-                            .foregroundColor(.white)
-                            //.background(Color.gray.opacity(0.5))
-                            //.clipShape(Circle())
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.leading, 5) // This pads the Back button to the left
-                }
-                Spacer() // This spacer places the Cube button to the right (instead of the center)
-                Button(action: {
-                    isDragging.toggle()
-                }) {
-                    Image(systemName: "cube")
+            // The Back Button only appears at the second recommendation, and beyond
+            if userData.currentIndex > 0 {
+                Button(action: { userData.showPreviousProduct() }) {
+                    Image(systemName: "chevron.left")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                        .padding()
+                        .frame(width: 35, height: 35)
+                        .padding() // For some reason, this makes the circle around the button bigger
                         .foregroundColor(.white)
+                        //.background(Color.gray.opacity(0.5))
+                        //.clipShape(Circle())
                 }
                 .buttonStyle(PlainButtonStyle())
-                .padding(.trailing, 20) // This pads the Cube button to the right
+                .padding(.leading, 5) // This pads the Back button to the left
             }
         }
         .padding() // This keeps the product title and info from being too close to the top of the screen
