@@ -12,197 +12,158 @@ struct HomeView: View {
     @State private var isDragging: Bool = false
 
     var body: some View {
-        VStack(spacing: 20) {            
-            /*
-            Button(action: { userData.showNextProduct() }) {
-                ZStack {
-                    Image("icon-background")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
+        if let product = userData.currentProduct {
+            
+            // Main HStack
+            HStack {
+                
+                // First column (Product info, "Save" button, "Add to Cart" button, "New Group" button, "Back" button)
+                VStack(alignment: .leading, spacing: 10) {
                     
-                    LottieView(filename: "shopping-cart-animation")
-                        .frame(height: 60)
-                }
-            }
-            .padding(.top, 20) // This pads the Button to the top
-            .buttonStyle(PlainButtonStyle())
-             */
-            
-            /*
-            Button(action: {}) {
-                Image(systemName: "magnifyingglass")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.white)
-            }
-            .padding(.top, 10)
-            //.buttonStyle(PlainButtonStyle())
-            */
-            
-            if let product = userData.currentProduct {
-                HStack {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(product.name)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.leading)
-                            .padding(.top, 20) // This pads the Product title to the top
-
-                        Text(product.description)
-                            .font(.headline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.leading)
-                            .padding(.top, 10)
-
-                        Text("$\(product.price, specifier: "%.2f")")
-                            .font(.title2)
-                            .foregroundColor(.primary)
-                            .padding(.top, 10)
-
-                        // Save button
-                        Button(action: {
-                            handleSaveForLater(product: product)
-                        }) {
-                            Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(.white)
-                        }
-                        .buttonStyle(PlainButtonStyle())
+                    // Product name
+                    Text(product.name)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.leading)
                         .padding(.top, 20)
-                        
-                        Spacer()
-                        
-                        /*
-                        Button(action: { handleAddToCart(product: product) }) {
-                            Image(systemName: "cart.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(.blue)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        */
-                        
-                        Button(action: { handleAddToCart(product: product) }) {
-                            Text("Add to Cart")
-                                .padding()
-                                .frame(maxWidth: 150)
-                                .foregroundColor(.white)
-                        }
-                        .background(
-                            Color.blue
-                        )
-                        .cornerRadius(100)
-                        .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
-                        //.padding(.top, 20)
 
-                        /*
-                        Button(action: { handleCreateCollection(product: product) }) {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(.green)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        */
-                        
-                        Button(action: { handleCreateCollection(product: product) }) {
-                            Text("New Group")
-                                .padding()
-                                .frame(maxWidth: 150)
-                                .foregroundColor(.white)
-                        }
-                        .background(
-                            Color.green
-                        )
-                        .cornerRadius(100)
-                        .buttonStyle(PlainButtonStyle()) // Apply a plain button style to remove default styling
+                    // Product description
+                    Text(product.description)
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.leading)
                         .padding(.top, 10)
 
-                        Spacer()
+                    // Price
+                    Text("$\(product.price, specifier: "%.2f")")
+                        .font(.title2)
+                        .foregroundColor(.primary)
+                        .padding(.top, 10)
+
+                    // "Save" button
+                    Button(action: {
+                        handleSaveForLater(product: product)
+                    }) {
+                        Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
                     }
-                    .padding(.leading, 20) // This pads the entire VStack to the left
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.top, 20)
+                    
+                    Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-                    InteractiveProductCard(
-                        product: product
+                    // "Add to Cart" button
+                    Button(action: { handleAddToCart(product: product) }) {
+                        Text("Add to Cart")
+                            .padding()
+                            .frame(maxWidth: 150)
+                            .foregroundColor(.white)
+                    }
+                    .background(
+                        Color.blue
                     )
-                    .padding(.leading, 250) // These three center the product in the right side of the window
-                    .padding(.trailing, 250)
-                    .padding(.top, 60)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition
+                    .cornerRadius(100)
+                    .buttonStyle(PlainButtonStyle())
                     
-    
-                    VStack {
-                        // Share button
-                        Button(action: {}) {
-                            Image(systemName: "square.and.arrow.up")
+                    // "New Group" button
+                    Button(action: { handleCreateCollection(product: product) }) {
+                        Text("New Group")
+                            .padding()
+                            .frame(maxWidth: 150)
+                            .foregroundColor(.white)
+                    }
+                    .background(
+                        Color.green
+                    )
+                    .cornerRadius(100)
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.top, 10)
+                    
+                    // "Back" button (only appears at the second recommendation, and beyond)
+                    if userData.currentIndex > 0 {
+                        Button(action: { userData.showPreviousProduct() }) {
+                            Image(systemName: "chevron.left")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
+                                .frame(width: 35, height: 35)
+                                .padding() // For some reason, this makes the circle around the button bigger
                                 .foregroundColor(.white)
+                            //.background(Color.gray.opacity(0.5))
+                            //.clipShape(Circle())
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .padding(.top, 20)
-                        
-                        Spacer()
-                        
-                        // Cube button
-                        Button(action: {
-                            isDragging.toggle()
-                        }) {
-                            Image(systemName: "cube")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .padding()
-                                .foregroundColor(.white)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.trailing, 20) // This pads the Cube button to the right
+                        .padding(.leading, 5)
                     }
                     
+                //  END OF VSTACK (First column)
+            
+                }
+                .padding(.leading, 20) // This pads the VStack to the left
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                // Second column (3D object)
+                InteractiveProductCard(
+                    product: product
+                )
+                .padding(.leading, 250) // Adjust the positioning of the 3D object within the second column
+                .padding(.trailing, 250)
+                .padding(.top, 60)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition (from one product to the next)
+                
+                // Third column ("Share" button, "Cube" button)
+                VStack {
                     
+                    // "Share" button
+                    Button(action: {}) {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.top, 20)
+                    
+                    Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
+                    // "Cube" button
+                    Button(action: {
+                        isDragging.toggle()
+                    }) {
+                        Image(systemName: "cube")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .padding()
+                            .foregroundColor(.white)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.trailing, 20) // This pads the Cube button to the right
                 }
-            } else {
-                Text("No more recommendations")
-                    .font(.title)
-                    .foregroundColor(.secondary)
-                    .padding()
+                .padding()
+                
+                //  END OF VSTACK (Third column)
+                
             }
-
-            //Spacer() // This adds a bit of space between the upper HStack and the lower HStack
-
-            // The Back Button only appears at the second recommendation, and beyond
-            if userData.currentIndex > 0 {
-                Button(action: { userData.showPreviousProduct() }) {
-                    Image(systemName: "chevron.left")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 35, height: 35)
-                        .padding() // For some reason, this makes the circle around the button bigger
-                        .foregroundColor(.white)
-                        //.background(Color.gray.opacity(0.5))
-                        //.clipShape(Circle())
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding(.leading, 5) // This pads the Back button to the left
-            }
+            
+            // This gesture applies to the main HStack
+            .gesture(
+                TapGesture(count: 3)
+                    .onEnded {
+                        userData.showNextProduct()
+                    }
+            )
+            
+        } else {
+            Text("No more recommendations")
+                .font(.title)
+                .foregroundColor(.secondary)
+                .padding()
         }
-        .padding() // This keeps the product title and info from being too close to the top of the screen
-        .gesture(
-            TapGesture(count: 3)
-                .onEnded {
-                    userData.showNextProduct()
-                }
-        )
     }
 
     private func handleSwipeLeft(product: Product) {
