@@ -151,6 +151,11 @@ struct HomeView: View {
                     .padding(.top, 60)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition
+                    
+                    
+                    // Put a VStack with the Share button and Cube button here
+                    
+                    
                 }
             } else {
                 Text("No more recommendations")
