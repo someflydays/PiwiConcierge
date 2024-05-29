@@ -87,7 +87,7 @@ struct HomeView: View {
                 HStack {
                     
                     // First column (Product info, "Add to Cart" button, "New Group" button)
-                    VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 20) {
                         
                         // Product name
                         Text(product.name)
@@ -147,9 +147,9 @@ struct HomeView: View {
                     InteractiveProductCard(
                         product: product
                     )
-                    .padding(.leading, 250) // Adjust the positioning of the 3D object within the second column
-                    .padding(.trailing, 250)
-                    .padding(.top, 60)
+                    //.padding(.leading, 100) // Adjust the positioning of the 3D object within the second column
+                    .padding(.trailing, 100)
+                    //.padding(.top, 60)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition (from one product to the next)
                     
@@ -169,10 +169,10 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
-                            .padding()
+                            //.padding()
                             .foregroundColor(.white)
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    //.buttonStyle(PlainButtonStyle())
                     .padding(.trailing, 20) // This pads the Cube button to the right
                     
                 }

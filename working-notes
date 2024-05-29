@@ -82,3 +82,4 @@ UI TODO:
 - Add a "Saved" text (next to the Save button) that fades in and back out when the user saves a product
 - Leftmost HStack gets crushed when window is resized
 - Bring back the circle behind the cube button and the share button
+- When a button is selected, use black labels on a white background
