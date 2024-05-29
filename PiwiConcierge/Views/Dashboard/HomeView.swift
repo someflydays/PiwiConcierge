@@ -14,32 +14,37 @@ struct HomeView: View {
     var body: some View {
         if let product = userData.currentProduct {
             
-            // Main HStack
-            HStack {
+            // Main VStack
+            VStack {
                 
-                // First column (Product info, "Save" button, "Add to Cart" button, "New Group" button, "Back" button)
-                VStack(alignment: .leading, spacing: 10) {
+                // First row ("Back" button, "Forward" button, "Save" button, "Share" button, "More Info" button)
+                HStack {
                     
-                    // Product name
-                    Text(product.name)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 20)
-
-                    // Product description
-                    Text(product.description)
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 10)
-
-                    // Price
-                    Text("$\(product.price, specifier: "%.2f")")
-                        .font(.title2)
-                        .foregroundColor(.primary)
-                        .padding(.top, 10)
-
+                    // "Back" button (only appears at the second recommendation, and beyond)
+                    Button(action: { userData.showPreviousProduct() }) {
+                        Image(systemName: "chevron.left")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 30, height: 30)
+                            //.padding() // For some reason, this makes the circle around the button bigger
+                            .foregroundColor(.white)
+                    }
+                    //.buttonStyle(PlainButtonStyle())
+                    .padding(.leading, 20)
+                    
+                    // "Forward" button (should only appear if the user goes back)
+                    Button(action: { userData.showNextProduct() }) {
+                        Image(systemName: "chevron.right")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 30, height: 30)
+                            //.padding() // For some reason, this makes the circle around the button bigger
+                            .foregroundColor(.white)
+                    }
+                    //.buttonStyle(PlainButtonStyle())
+                    
+                    Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
                     // "Save" button
                     Button(action: {
                         handleSaveForLater(product: product)
@@ -47,86 +52,112 @@ struct HomeView: View {
                         Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 30, height: 30)
                             .foregroundColor(.white)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.top, 20)
-                    
-                    Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                    // "Add to Cart" button
-                    Button(action: { handleAddToCart(product: product) }) {
-                        Text("Add to Cart")
-                            .padding()
-                            .frame(maxWidth: 150)
-                            .foregroundColor(.white)
-                    }
-                    .background(
-                        Color.blue
-                    )
-                    .cornerRadius(100)
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    // "New Group" button
-                    Button(action: { handleCreateCollection(product: product) }) {
-                        Text("New Group")
-                            .padding()
-                            .frame(maxWidth: 150)
-                            .foregroundColor(.white)
-                    }
-                    .background(
-                        Color.green
-                    )
-                    .cornerRadius(100)
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.top, 10)
-                    
-                    // "Back" button (only appears at the second recommendation, and beyond)
-                    if userData.currentIndex > 0 {
-                        Button(action: { userData.showPreviousProduct() }) {
-                            Image(systemName: "chevron.left")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 35, height: 35)
-                                .padding() // For some reason, this makes the circle around the button bigger
-                                .foregroundColor(.white)
-                            //.background(Color.gray.opacity(0.5))
-                            //.clipShape(Circle())
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.leading, 5)
-                    }
-                    
-                //  END OF VSTACK (First column)
-            
-                }
-                .padding(.leading, 20) // This pads the VStack to the left
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                // Second column (3D object)
-                InteractiveProductCard(
-                    product: product
-                )
-                .padding(.leading, 250) // Adjust the positioning of the 3D object within the second column
-                .padding(.trailing, 250)
-                .padding(.top, 60)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition (from one product to the next)
-                
-                // Third column ("Share" button, "Cube" button)
-                VStack {
+                    //.buttonStyle(PlainButtonStyle())
                     
                     // "Share" button
                     Button(action: {}) {
                         Image(systemName: "square.and.arrow.up")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 30, height: 30)
                             .foregroundColor(.white)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.top, 20)
+                    //.buttonStyle(PlainButtonStyle())
+                    
+                    // "More Info" button
+                    Button(action: {}) {
+                        Image(systemName: "ellipsis")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.white)
+                    }
+                    //.buttonStyle(PlainButtonStyle())
+                    .padding(.trailing, 20)
+                    
+                    //  END OF HSTACK (First row)
+                    
+                }
+                .padding(.top, 20)
+                
+                // Second row
+                HStack {
+                    
+                    // First column (Product info, "Add to Cart" button, "New Group" button)
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        // Product name
+                        Text(product.name)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 20)
+                        
+                        // Product description
+                        Text(product.description)
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 10)
+                        
+                        // Price
+                        Text("$\(product.price, specifier: "%.2f")")
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                            .padding(.top, 10)
+                        
+                        Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        
+                        // "Add to Cart" button
+                        Button(action: { handleAddToCart(product: product) }) {
+                            Text("Add to Cart")
+                                .padding()
+                                .frame(maxWidth: 150)
+                                .foregroundColor(.white)
+                        }
+                        .background(
+                            Color.blue
+                        )
+                        .cornerRadius(100)
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        // "New Group" button
+                        Button(action: { handleCreateCollection(product: product) }) {
+                            Text("New Group")
+                                .padding()
+                                .frame(maxWidth: 150)
+                                .foregroundColor(.white)
+                        }
+                        .background(
+                            Color.green
+                        )
+                        .cornerRadius(100)
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 10)
+                        
+                        //  END OF VSTACK (First column in second row)
+                        
+                    }
+                    .padding(.leading, 20) // This pads the VStack to the left
+                    
+                    // Second column (3D object)
+                    InteractiveProductCard(
+                        product: product
+                    )
+                    .padding(.leading, 250) // Adjust the positioning of the 3D object within the second column
+                    .padding(.trailing, 250)
+                    .padding(.top, 60)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .transition(.opacity.animation(.easeInOut(duration: 0.5))) // Slower fade transition (from one product to the next)
+                    
+                }
+                
+                // Third row ("Cube" button)
+                
+                HStack {
                     
                     Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     
@@ -137,20 +168,19 @@ struct HomeView: View {
                         Image(systemName: "cube")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 30, height: 30)
                             .padding()
                             .foregroundColor(.white)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding(.trailing, 20) // This pads the Cube button to the right
+                    
                 }
-                .padding()
-                
-                //  END OF VSTACK (Third column)
+                .padding(.bottom, 20)
                 
             }
             
-            // This gesture applies to the main HStack
+            // This gesture applies to the main VStack
             .gesture(
                 TapGesture(count: 3)
                     .onEnded {
