@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var userData: UserData
     @State private var isDragging: Bool = false
+    @State private var searchText: String = ""
 
     var body: some View {
         if let product = userData.currentProduct {
@@ -42,6 +43,14 @@ struct HomeView: View {
                             .foregroundColor(.white)
                     }
                     //.buttonStyle(PlainButtonStyle())
+                    
+                    Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
+                    SearchBar(text: $searchText)
+                        .frame(width: 500) // Adjust width of Search Bar
+                        //.padding(.horizontal)
+                        .cornerRadius(20)
+                        .shadow(radius: 5)
                     
                     Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     
@@ -114,29 +123,32 @@ struct HomeView: View {
                         // "Add to Cart" button
                         Button(action: { handleAddToCart(product: product) }) {
                             Text("Add to Cart")
+                                .font(.title2)
                                 .padding()
-                                .frame(maxWidth: 150)
+                                .frame(maxWidth: 175, maxHeight: 75)
                                 .foregroundColor(.white)
                         }
                         .background(
                             Color.blue
                         )
                         .cornerRadius(100)
-                        .buttonStyle(PlainButtonStyle())
+                        //.buttonStyle(PlainButtonStyle())
                         
                         // "New Group" button
                         Button(action: { handleCreateCollection(product: product) }) {
                             Text("New Group")
+                                .font(.title2)
                                 .padding()
-                                .frame(maxWidth: 150)
+                                .frame(maxWidth: 175, maxHeight: 75)
                                 .foregroundColor(.white)
                         }
+                        /*
                         .background(
                             Color.green
                         )
-                        .cornerRadius(100)
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.top, 10)
+                        */
+                        //.cornerRadius(100)
+                        //.buttonStyle(PlainButtonStyle())
                         
                         //  END OF VSTACK (First column in second row)
                         
