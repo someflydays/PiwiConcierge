@@ -26,7 +26,7 @@ struct HomeView: View {
                         Image(systemName: "chevron.left")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 20, height: 20)
                             .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
@@ -39,7 +39,7 @@ struct HomeView: View {
                         Image(systemName: "chevron.right")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 20, height: 20)
                             .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
@@ -63,7 +63,7 @@ struct HomeView: View {
                         Image(systemName: product.isSaved ? "bookmark.fill" : "bookmark")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 20, height: 20)
                             .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
@@ -75,7 +75,7 @@ struct HomeView: View {
                         Image(systemName: "square.and.arrow.up")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 20, height: 20)
                             .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
@@ -87,7 +87,7 @@ struct HomeView: View {
                         Image(systemName: "ellipsis")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 20, height: 20)
                             .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
@@ -98,7 +98,7 @@ struct HomeView: View {
                     //  END OF HSTACK (First row)
                     
                 }
-                .padding(.top, 20)
+                //.padding(.top, 20)
                 
                 // Second row
                 HStack {
@@ -189,7 +189,7 @@ struct HomeView: View {
                         Image(systemName: "cube")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 20, height: 20)
                             .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
