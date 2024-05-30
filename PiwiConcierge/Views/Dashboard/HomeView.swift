@@ -27,9 +27,10 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
-                            //.padding() // For some reason, this makes the circle around the button bigger
+                            .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
+                    .buttonBorderShape(.circle)
                     //.buttonStyle(PlainButtonStyle())
                     .padding(.leading, 20)
                     
@@ -39,9 +40,10 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
-                            //.padding() // For some reason, this makes the circle around the button bigger
+                            .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
+                    .buttonBorderShape(.circle)
                     //.buttonStyle(PlainButtonStyle())
                     
                     Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,8 +64,10 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
+                            .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
+                    .buttonBorderShape(.circle)
                     //.buttonStyle(PlainButtonStyle())
                     
                     // "Share" button
@@ -72,8 +76,10 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
+                            .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
+                    .buttonBorderShape(.circle)
                     //.buttonStyle(PlainButtonStyle())
                     
                     // "More Info" button
@@ -82,8 +88,10 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
+                            .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
+                    .buttonBorderShape(.circle)
                     //.buttonStyle(PlainButtonStyle())
                     .padding(.trailing, 20)
                     
@@ -182,12 +190,13 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
-                            //.padding()
+                            .padding() // This makes the circle around the button bigger
                             .foregroundColor(.white)
                     }
                     //.buttonStyle(PlainButtonStyle())
                     .padding(.trailing, 20) // This pads the "Cube" button to the right
-                    .padding(.top, 35) // Even though "Cube" is in same HStack as "New Group", "Cube" is lower
+                    .padding(.top, 20) // Even though "Cube" is in same HStack as "New Group", "Cube" is lower
+                    .buttonBorderShape(.circle)
                     
                 }
                 .padding(.bottom, 20)
