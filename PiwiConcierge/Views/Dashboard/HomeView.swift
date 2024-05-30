@@ -197,6 +197,9 @@ struct HomeView: View {
                     .padding(.trailing, 20) // This pads the "Cube" button to the right
                     .padding(.top, 20) // Even though "Cube" is in same HStack as "New Group", "Cube" is lower
                     .buttonBorderShape(.circle)
+                    /*.onDrag({
+                        return NSItemProvider(contentsOf: product.modelURL) ?? NSItemProvider()
+                    })*/
                     
                 }
                 .padding(.bottom, 20)

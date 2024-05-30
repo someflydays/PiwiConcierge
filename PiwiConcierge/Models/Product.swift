@@ -13,5 +13,6 @@ struct Product: Identifiable {
     let description: String
     let price: Double
     let modelName: String
+    //let modelURL: URL
     var isSaved: Bool = false
 }
