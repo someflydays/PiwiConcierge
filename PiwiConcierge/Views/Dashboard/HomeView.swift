@@ -95,7 +95,7 @@ struct HomeView: View {
                 // Second row
                 HStack {
                     
-                    // First column (Product info, "Add to Cart" button, "New Group" button)
+                    // First column (Product info, "Add to Cart" button)
                     VStack(alignment: .leading, spacing: 20) {
                         
                         // Product name
@@ -125,30 +125,14 @@ struct HomeView: View {
                             Text("Add to Cart")
                                 .font(.title2)
                                 .padding()
-                                .frame(maxWidth: 175, maxHeight: 75)
+                                .frame(maxWidth: 265, maxHeight: 75)
                                 .foregroundColor(.white)
                         }
                         .background(
                             Color.blue
                         )
                         .cornerRadius(100)
-                        //.buttonStyle(PlainButtonStyle())
-                        
-                        // "New Group" button
-                        Button(action: { handleCreateCollection(product: product) }) {
-                            Text("New Group")
-                                .font(.title2)
-                                .padding()
-                                .frame(maxWidth: 175, maxHeight: 75)
-                                .foregroundColor(.white)
-                        }
-                        /*
-                        .background(
-                            Color.green
-                        )
-                        */
-                        //.cornerRadius(100)
-                        //.buttonStyle(PlainButtonStyle())
+                        .buttonStyle(PlainButtonStyle())
                         
                         //  END OF VSTACK (First column in second row)
                         
@@ -167,9 +151,26 @@ struct HomeView: View {
                     
                 }
                 
-                // Third row ("Cube" button)
+                // Third row ("New Group" button, "Cube" button)
                 
                 HStack {
+                    
+                    // "New Group" button
+                    Button(action: { handleCreateCollection(product: product) }) {
+                        Text("New Group")
+                            .font(.title2)
+                            .padding()
+                            .frame(maxWidth: 225, maxHeight: 75)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.leading, 20) // This pads the "New Group" button to the left
+                    /*
+                    .background(
+                        Color.green
+                    )
+                    */
+                    //.cornerRadius(100)
+                    //.buttonStyle(PlainButtonStyle())
                     
                     Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     
@@ -185,7 +186,8 @@ struct HomeView: View {
                             .foregroundColor(.white)
                     }
                     //.buttonStyle(PlainButtonStyle())
-                    .padding(.trailing, 20) // This pads the Cube button to the right
+                    .padding(.trailing, 20) // This pads the "Cube" button to the right
+                    .padding(.top, 35) // Even though "Cube" is in same HStack as "New Group", "Cube" is lower
                     
                 }
                 .padding(.bottom, 20)

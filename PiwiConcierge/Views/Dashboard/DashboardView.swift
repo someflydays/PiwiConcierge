@@ -14,7 +14,13 @@ struct DashboardView: View {
         TabView {
             HomeView(userData: userData)
                 .tabItem {
-                    Label("Home", systemImage: "house.fill") // find a new symbol
+                    //Label("Home", systemImage: "house.fill") // find a new symbol
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+            
+            SavedView()
+                .tabItem {
+                    Label("Saved", systemImage: "bookmark.fill")
                 }
             
             CartView()
@@ -22,20 +28,19 @@ struct DashboardView: View {
                     Label("Cart", systemImage: "cart.fill") // alternate the symbol based on if cart is empty or not
                 }
             
-            SavedView()
-                .tabItem {
-                    Label("Saved", systemImage: "bookmark.fill")
-                }
-
+            /*
+            // Make the profile view visible from the "..." button?
             ProfileView(userData: userData)
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
             
+            // Make the Search view visible from the Home tab?
             SearchView()
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
+            */
         }
     }
 }
