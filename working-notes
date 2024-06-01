@@ -59,7 +59,7 @@ There should also be a cool hand gesture that adds a product to cart (for exampl
 UI TODO:
 
 - Move object a bit more into the center of the window ✅
-- Fix "next product" navigation gesture (double-tap? Triple-tap?)
+- Fix "next product" navigation gesture (double-tap? Triple-tap?) ✅
 - Add a "Forward" button✅ that appears when the user goes back to a previous object. This is different than the triple-tap, which recommends a new product.
 - Implement the functionality of the various buttons ‼️
 - Change Add To Cart button icon ✅
@@ -68,25 +68,26 @@ UI TODO:
 - Improve transition animation from one object to the next. ✅
 - When navigating to an object, it should be spawned with its default non-rotated orientation (not in the same rotated orientation as the previous object). ‼️
 - Implement a maximum 3D model size (for very large objects) ‼️
-- Implement a minimum window size, so it can't be shrunken too much ‼️
-- When the Cube button is selected, and the window disappears, figure out how to make it easy to add to cart. (Float an add to cart button along with the object?). Also figure out how to disable the cube-mode. UPDATE: See Nike inspiration photo
+- Implement a minimum window size, so it can't be shrunken too much ‼️🟡
+- When the Cube button is selected, and the window disappears, figure out how to make it easy to add to cart. (Float an add to cart button along with the object?). Also figure out how to disable the cube-mode. UPDATE: See Nike inspiration photo (nike-xr.jpeg)
 - Remove circle behind back button ✅
 - Make back button a bit smaller, OR make the side tab buttons a bit bigger ✅
-- Make the AppIcon layers appear in 3D when selected from Vision Pro Home Screen
+- Make the AppIcon layers appear in 3D when selected from Vision Pro Home Screen (should be already doing this)
 - When cart is empty, Cart Tab icon should be empty cart (􀍩) else, 􀍪 (?)
 - Change "Add to Cart" button color when clicked
 - Make buttons peel off the window when looked at (?)
 - Right now, it's hard to rotate the object if the window is up close
 - IDEA: Piwi Concierge logo-looking search button in the top right corner of the window. If tapped, it goes to the next product. If held, it listens to user feedback- and then goes to the next product. (?)
 - IDEA: Implement an 'actual size' button that makes the model life-size
-	Make Quicklook ("Cube" button) display object with accurate dimensions!
+	Make Quicklook ("Cube" button) display object with accurate dimensions! To do this, disable scaling.
 - Add a "Saved" text (next to the Save button) that fades in and back out when the user saves a product (?)
 - Bring back the circle behind the cube button and the share button ✅
 - When a button is selected, use black labels on a white background (?)
 - Get rid of thin lines surrounding Search bar
-- Product reviews
+- Product reviews. ‼️
 - Implement rotation tilt, like Apple has in its AR Quicklook for its default USDZ models
-- Show a circular outline that surrounds the cube button, as then user holds the button to activate the windowed AR Quicklook. This circular outline should indicate how long they need to hold it (just a second).
-- Remove the reactive "shrink" animation when buttons are clicked (?
-- CHANGE THE CODE TO ACCESS 3D MODELS FROM A URL, NOT FROM FILES - UNLESS THEY ARE ALREADY LOCALLY STORED? Accessing the models from a URL is more realistic, given the capability to stream 3D assets to a URL via NVIDIA GDN. Also, it should simplify the AR Quicklook a little, because the Quicklook can pull the model from its URL without needing to know the file URL. Unless... should the models somehow be previewed (without downloading ever)?
-- The animation (tap interaction) should be handled with Reality Composer, so it's embedded into the object's USDZ file itself
+- Show a circular outline that surrounds the cube button, as the user holds the button to activate the windowed AR Quicklook. This circular outline should indicate how long they need to hold it (just a second).
+- Remove the reactive "shrink" animation when buttons are clicked (?)
+- CHANGE THE SOURCE CODE TO ACCESS 3D MODELS FROM A URL, NOT FROM FILES - UNLESS THEY ARE ALREADY LOCALLY STORED? Accessing the models from a URL is more realistic, given the capability to stream 3D assets to a URL via NVIDIA GDN. Also, it should simplify the AR Quicklook a little, because the Quicklook can pull the model from its URL without needing to know the local  file URL. Unless... should the models somehow be previewed in 3D (without downloading ever)?
+- The animation (tap interaction) should be handled with Reality Composer, so it's embedded into the object's USDZ file itself ‼️
+- Automatic product rotation (?) ‼️
