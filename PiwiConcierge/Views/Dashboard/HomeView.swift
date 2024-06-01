@@ -103,7 +103,7 @@ struct HomeView: View {
                 // Second row
                 HStack {
                     
-                    // First column (Product info, "Add to Cart" button)
+                    // First column (Product info, "Buy Now" button, "Add to Cart" button)
                     VStack(alignment: .leading, spacing: 20) {
                         
                         // Product name
@@ -127,6 +127,24 @@ struct HomeView: View {
                             .padding(.top, 10)
                         
                         Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        
+                        // "Buy Now" button
+                        Button(action: { handleAddToCart(product: product) }) {
+                            Image(systemName: "apple.logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                            Text("Buy Now")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                        }
+                        .frame(maxWidth: 265, maxHeight: 75)
+                        .background(
+                            Color.black
+                        )
+                        .cornerRadius(100)
+                        .buttonStyle(PlainButtonStyle())
                         
                         // "Add to Cart" button
                         Button(action: { handleAddToCart(product: product) }) {
