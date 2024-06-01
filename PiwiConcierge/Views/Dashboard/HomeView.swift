@@ -205,15 +205,6 @@ struct HomeView: View {
                 .padding(.bottom, 20)
                 
             }
-            
-            // This gesture applies to the main VStack
-            .gesture(
-                TapGesture(count: 3)
-                    .onEnded {
-                        userData.showNextProduct()
-                    }
-            )
-            
         } else {
             Text("No more recommendations")
                 .font(.title)
