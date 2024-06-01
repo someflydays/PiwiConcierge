@@ -89,3 +89,4 @@ UI TODO:
 - Show a circular outline that surrounds the cube button, as then user holds the button to activate the windowed AR Quicklook. This circular outline should indicate how long they need to hold it (just a second).
 - Remove the reactive "shrink" animation when buttons are clicked (?
 - CHANGE THE CODE TO ACCESS 3D MODELS FROM A URL, NOT FROM FILES - UNLESS THEY ARE ALREADY LOCALLY STORED? Accessing the models from a URL is more realistic, given the capability to stream 3D assets to a URL via NVIDIA GDN. Also, it should simplify the AR Quicklook a little, because the Quicklook can pull the model from its URL without needing to know the file URL. Unless... should the models somehow be previewed (without downloading ever)?
+- The animation (tap interaction) should be handled with Reality Composer, so it's embedded into the object's USDZ file itself
