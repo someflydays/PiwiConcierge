@@ -51,7 +51,7 @@ struct HomeView: View {
                     SearchBar(text: $searchText)
                         .frame(width: 500) // Adjust width of Search Bar
                         //.padding(.horizontal)
-                        .cornerRadius(20)
+                        //.cornerRadius(20)
                         .shadow(radius: 5)
                     
                     Spacer() ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,18 +219,6 @@ struct HomeView: View {
                 .font(.title)
                 .foregroundColor(.secondary)
                 .padding()
-        }
-    }
-
-    private func handleSwipeLeft(product: Product) {
-        withAnimation {
-            userData.showNextProduct()
-        }
-    }
-
-    private func handleSwipeRight(product: Product) {
-        withAnimation {
-            userData.showPreviousProduct()
         }
     }
 
