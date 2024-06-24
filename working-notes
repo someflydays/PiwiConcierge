@@ -91,3 +91,26 @@ UI TODO:
 - CHANGE THE SOURCE CODE TO ACCESS 3D MODELS FROM A URL, NOT FROM FILES - UNLESS THEY ARE ALREADY LOCALLY STORED? Accessing the models from a URL is more realistic, given the capability to stream 3D assets to a URL via NVIDIA GDN. Also, it should simplify the AR Quicklook a little, because the Quicklook can pull the model from its URL without needing to know the local  file URL. Unless... should the models somehow be previewed in 3D (without downloading ever)?
 - The animation (tap interaction) should be handled with Reality Composer, so it's embedded into the object's USDZ file itself ‼️
 - Automatic product rotation (?) ‼️
+
+
+IDEA: (June 24 at Knight Campus in Eugene)
+
+When a new product is recommended, it should be displayed in a Windowed AR Quickook (aka - floating in the user's space, in its OWN "window" - but there is no visible window surrounding it) ... THEN, the user can click the object to bring up more details like the price, store, description, etc ... I want to lean toward a more unique 3D shopping experience for the visionOS version of the app. That's why the object should be displayed in the user's surroundings by default. In the iPadOS version of the app, the opject should be displayed in the UI window by default, and displayed in the user's surroundings as an additional option.
+
+^ TLDR:
+
+VISION OS    |    IPAD OS
+---------         -------
+
+Windowed	  UI window by	
+Quick Look	  default.
+by default.
+
+UI window	 Windowed Quick
+appears by	 Look appears by
+clicking	 clicking button.
+button.
+
+
+
+.
