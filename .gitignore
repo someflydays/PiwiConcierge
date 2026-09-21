@@ -1,2 +1,9 @@
 ./README
 design-notes
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+.DS_Store
+DerivedData/
+.build/
